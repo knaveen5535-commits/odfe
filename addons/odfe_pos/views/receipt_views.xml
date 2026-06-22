@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_odfe_receipt_tree" model="ir.ui.view">
+        <field name="name">odfe.receipt.tree</field>
+        <field name="model">odfe.receipt</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="receipt_ref"/>
+                <field name="order_id"/>
+                <field name="receipt_type"/>
+                <field name="printed"/>
+                <field name="receipt_date"/>
+            </tree>
+        </field>
+    </record>
+    <record id="view_odfe_receipt_form" model="ir.ui.view">
+        <field name="name">odfe.receipt.form</field>
+        <field name="model">odfe.receipt</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="receipt_ref"/>
+                            <field name="order_id"/>
+                            <field name="receipt_type"/>
+                        </group>
+                        <group>
+                            <field name="printed"/>
+                            <field name="receipt_date"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="receipt_data" widget="text"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

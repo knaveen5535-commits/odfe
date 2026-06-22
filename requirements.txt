@@ -1,0 +1,8 @@
+odoo>=17.0
+psycopg2-binary
+python-dateutil
+qrcode[pil]
+openpyxl
+xlsxwriter
+phonenumbers
+babel

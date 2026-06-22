@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_odfe_reservation_tree" model="ir.ui.view">
+        <field name="name">odfe.reservation.tree</field>
+        <field name="model">odfe.reservation</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="reservation_ref"/>
+                <field name="customer_id"/>
+                <field name="start_time"/>
+                <field name="end_time"/>
+                <field name="status"/>
+            </tree>
+        </field>
+    </record>
+</odoo>

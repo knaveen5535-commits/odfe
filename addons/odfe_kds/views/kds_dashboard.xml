@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_odfe_kds_dashboard" model="ir.ui.view">
+        <field name="name">ODFE KDS Dashboard</field>
+        <field name="type">qweb</field>
+        <field name="arch" type="xml">
+            <t t-name="odfe_kds.kds_dashboard">
+                <div class="odfe-kds-dashboard">
+                    <header class="kds-header">
+                        <h1>Kitchen Display System</h1>
+                        <div class="kds-time" t-esc="datetime.datetime.now().strftime('%H:%M')"/>
+                    </header>
+                    <div class="kds-orders">
+                        <t t-foreach="orders" t-as="order">
+                            <div t-att-class="'kds-order priority-' + order.priority">
+                                <div class="kds-order-header">
+                                    <span class="kds-order-id" t-esc="order.display_name"/>
+                                    <span class="kds-table" t-esc="order.table_name"/>
+                                    <span class="kds-status" t-esc="order.status"/>
+                                </div>
+                                <div class="kds-order-items">
+                                    <t t-foreach="order.item_ids" t-as="item">
+                                        <div class="kds-item">
+                                            <span class="item-qty" t-esc="item.qty"/>x
+                                            <span class="item-name" t-esc="item.product_name"/>
+                                            <t t-if="item.note">
+                                                <span class="item-note" t-esc="item.note"/>
+                                            </t>
+                                        </div>
+                                    </t>
+                                </div>
+                                <div class="kds-order-actions">
+                                    <t t-if="order.status == 'new'">
+                                        <button class="btn btn-warning" t-att-data-order-id="order.id">Start</button>
+                                    </t>
+                                    <t t-if="order.status == 'preparing'">
+                                        <button class="btn btn-success" t-att-data-order-id="order.id">Ready</button>
+                                    </t>
+                                </div>
+                            </div>
+                        </t>
+                    </div>
+                </div>
+            </t>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="report_sales_pdf" model="ir.actions.report">
+        <field name="name">Sales Report PDF</field>
+        <field name="model">odfe.report</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">odfe_reports.sales_report_template</field>
+        <field name="print_report_name">'SalesReport_%s' % (object.name)</field>
+    </record>
+    <record id="view_odfe_sales_report_template" model="ir.ui.view">
+        <field name="name">odfe.reports.sales_report_template</field>
+        <field name="type">qweb</field>
+        <field name="arch" type="xml">
+            <t t-name="odfe_reports.sales_report_template">
+                <div class="odfe-report">
+                    <h1>Sales Report</h1>
+                    <p>Period: <t t-esc="o.date_from"/> to <t t-esc="o.date_to"/></p>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Order Ref</th>
+                                <th>Date</th>
+                                <th>Employee</th>
+                                <th>Total</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-set="orders" t-value="o.env['odfe.order'].search([])"/>
+                            <t t-foreach="orders" t-as="order">
+                                <tr>
+                                    <td><t t-esc="order.order_ref"/></td>
+                                    <td><t t-esc="order.order_date"/></td>
+                                    <td><t t-esc="order.employee_id.name"/></td>
+                                    <td><t t-esc="order.total"/></td>
+                                    <td><t t-esc="order.status"/></td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                    <p>Total Orders: <t t-esc="len(orders)"/></p>
+                </div>
+            </t>
+        </field>
+    </record>
+</odoo>

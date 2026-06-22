@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_odfe_customer_display" model="ir.ui.view">
+        <field name="name">ODFE Customer Display</field>
+        <field name="type">qweb</field>
+        <field name="arch" type="xml">
+            <t t-name="odfe_customer_display.order_display">
+                <div class="odfe-customer-display">
+                    <div class="order-info">
+                        <h1>Order <t t-esc="order.order_ref"/></h1>
+                        <p class="status" t-att-class="'status-' + order.status">
+                            <t t-esc="dict(order._fields['status'].selection).get(order.status, order.status)"/>
+                        </p>
+                    </div>
+                    <table class="order-items">
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Qty</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="order.order_line_ids" t-as="line">
+                                <tr>
+                                    <td><t t-esc="line.product_id.name"/></td>
+                                    <td><t t-esc="line.qty"/></td>
+                                    <td><t t-esc="line.status"/></td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </field>
+    </record>
+</odoo>

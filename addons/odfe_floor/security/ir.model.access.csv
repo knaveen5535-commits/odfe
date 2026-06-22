@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_odfe_floor_admin,odfe.floor.admin,model_odfe_floor,odfe_auth.group_cafe_admin,1,1,1,1
+access_odfe_floor_cashier,odfe.floor.cashier,model_odfe_floor,odfe_auth.group_cafe_cashier,1,0,0,0
+access_odfe_table_admin,odfe.table.admin,model_odfe_table,odfe_auth.group_cafe_admin,1,1,1,1
+access_odfe_table_cashier,odfe.table.cashier,model_odfe_table,odfe_auth.group_cafe_cashier,1,1,1,1
+access_odfe_table_waiter,odfe.table.waiter,model_odfe_table,odfe_auth.group_cafe_waiter,1,1,0,0

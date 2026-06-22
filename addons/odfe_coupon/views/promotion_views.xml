@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_odfe_promotion_tree" model="ir.ui.view">
+        <field name="name">odfe.promotion.tree</field>
+        <field name="model">odfe.promotion</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="promo_type"/>
+                <field name="valid_from"/>
+                <field name="valid_until"/>
+                <field name="is_active"/>
+            </tree>
+        </field>
+    </record>
+</odoo>

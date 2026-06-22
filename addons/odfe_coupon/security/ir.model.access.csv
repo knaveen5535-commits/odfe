@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_odfe_coupon_admin,odfe.coupon.admin,model_odfe_coupon,odfe_auth.group_cafe_admin,1,1,1,1
+access_odfe_coupon_cashier,odfe.coupon.cashier,model_odfe_coupon,odfe_auth.group_cafe_cashier,1,1,0,0
+access_odfe_promotion_admin,odfe.promotion.admin,model_odfe_promotion,odfe_auth.group_cafe_admin,1,1,1,1

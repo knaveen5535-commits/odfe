@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_odfe_tax_tree" model="ir.ui.view">
+        <field name="name">odfe.tax.tree</field>
+        <field name="model">odfe.tax</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="rate"/>
+                <field name="type"/>
+                <field name="is_active"/>
+            </tree>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_odfe_customer_display,odfe.customer.display,model_odfe_order,odfe_auth.group_cafe_admin,1,0,0,0

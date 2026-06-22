@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_odfe_product_admin,odfe.product.admin,model_odfe_product,odfe_auth.group_cafe_admin,1,1,1,1
+access_odfe_product_cashier,odfe.product.cashier,model_odfe_product,odfe_auth.group_cafe_cashier,1,0,0,0
+access_odfe_category_admin,odfe.product.category.admin,model_odfe_product_category,odfe_auth.group_cafe_admin,1,1,1,1
+access_odfe_tax_admin,odfe.tax.admin,model_odfe_tax,odfe_auth.group_cafe_admin,1,1,1,1
+access_odfe_uom_admin,odfe.uom.admin,model_odfe_uom,odfe_auth.group_cafe_admin,1,1,1,1

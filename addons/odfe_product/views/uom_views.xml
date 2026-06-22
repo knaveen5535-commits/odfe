@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_odfe_uom_tree" model="ir.ui.view">
+        <field name="name">odfe.uom.tree</field>
+        <field name="model">odfe.uom</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="category"/>
+            </tree>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_odfe_product_tree" model="ir.ui.view">
+        <field name="name">odfe.product.tree</field>
+        <field name="model">odfe.product</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="category_id"/>
+                <field name="sale_price"/>
+                <field name="is_active"/>
+                <field name="is_available"/>
+            </tree>
+        </field>
+    </record>
+    <record id="view_odfe_product_form" model="ir.ui.view">
+        <field name="name">odfe.product.form</field>
+        <field name="model">odfe.product</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="barcode"/>
+                            <field name="category_id"/>
+                            <field name="uom_id"/>
+                        </group>
+                        <group>
+                            <field name="sale_price"/>
+                            <field name="cost_price"/>
+                            <field name="tax_id"/>
+                            <field name="kitchen_category"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="is_active"/>
+                        <field name="is_available"/>
+                        <field name="is_combo"/>
+                        <field name="preparation_time"/>
+                    </group>
+                    <group>
+                        <field name="description"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="action_odfe_product" model="ir.actions.act_window">
+        <field name="name">Products</field>
+        <field name="res_model">odfe.product</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem id="menu_odfe_product" name="Products" parent="odfe_base.menu_odfe_configuration"
+              action="action_odfe_product" sequence="10"/>
+</odoo>

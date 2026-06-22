@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_odfe_employee_tree" model="ir.ui.view">
+        <field name="name">odfe.employee.tree</field>
+        <field name="model">odfe.employee</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="employee_code"/>
+                <field name="role_id"/>
+                <field name="phone"/>
+                <field name="email"/>
+                <field name="is_active"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_odfe_employee_form" model="ir.ui.view">
+        <field name="name">odfe.employee.form</field>
+        <field name="model">odfe.employee</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="employee_code"/>
+                            <field name="role_id"/>
+                            <field name="user_id"/>
+                        </group>
+                        <group>
+                            <field name="phone"/>
+                            <field name="email"/>
+                            <field name="pin_code"/>
+                            <field name="is_active"/>
+                            <field name="join_date"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_odfe_employee_search" model="ir.ui.view">
+        <field name="name">odfe.employee.search</field>
+        <field name="model">odfe.employee</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="employee_code"/>
+                <filter name="active" string="Active" domain="[('is_active','=',True)]"/>
+                <filter name="inactive" string="Inactive" domain="[('is_active','=',False)]"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_odfe_employee" model="ir.actions.act_window">
+        <field name="name">Employees</field>
+        <field name="res_model">odfe.employee</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help">Manage cafe employees.</field>
+    </record>
+
+    <menuitem id="menu_odfe_employee" name="Employees"
+              parent="odfe_base.menu_odfe_human_resources"
+              action="action_odfe_employee" sequence="10"/>
+</odoo>

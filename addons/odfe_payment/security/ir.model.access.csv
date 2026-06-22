@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_odfe_payment_admin,odfe.payment.admin,model_odfe_payment,odfe_auth.group_cafe_admin,1,1,1,1
+access_odfe_payment_cashier,odfe.payment.cashier,model_odfe_payment,odfe_auth.group_cafe_cashier,1,1,1,1
+access_odfe_payment_method_admin,odfe.payment.method.admin,model_odfe_payment_method,odfe_auth.group_cafe_admin,1,1,1,1
+access_odfe_qr_code_admin,odfe.qr.code.admin,model_odfe_qr_code,odfe_auth.group_cafe_admin,1,1,1,1

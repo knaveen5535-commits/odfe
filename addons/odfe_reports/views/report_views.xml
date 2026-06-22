@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_odfe_report_tree" model="ir.ui.view">
+        <field name="name">odfe.report.tree</field>
+        <field name="model">odfe.report</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="report_type"/>
+                <field name="date_from"/>
+                <field name="date_to"/>
+                <field name="output_format"/>
+                <field name="create_date"/>
+            </tree>
+        </field>
+    </record>
+    <record id="action_odfe_report" model="ir.actions.act_window">
+        <field name="name">Reports</field>
+        <field name="res_model">odfe.report</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem id="menu_odfe_reports" name="Reports" parent="odfe_base.menu_odfe_reports_main"
+              action="action_odfe_report" sequence="10"/>
+</odoo>

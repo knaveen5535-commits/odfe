@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="role_admin" model="odfe.role">
+            <field name="name">Admin</field>
+            <field name="code">admin</field>
+            <field name="is_admin">True</field>
+        </record>
+        <record id="role_cashier" model="odfe.role">
+            <field name="name">Cashier</field>
+            <field name="code">cashier</field>
+            <field name="is_cashier">True</field>
+        </record>
+        <record id="role_waiter" model="odfe.role">
+            <field name="name">Waiter</field>
+            <field name="code">waiter</field>
+            <field name="is_waiter">True</field>
+        </record>
+        <record id="role_kitchen" model="odfe.role">
+            <field name="name">Kitchen Staff</field>
+            <field name="code">kitchen</field>
+            <field name="is_kitchen">True</field>
+        </record>
+
+        <record id="group_cafe_admin" model="res.groups">
+            <field name="name">Admin</field>
+            <field name="category_id" ref="base.module_category_hidden"/>
+        </record>
+        <record id="group_cafe_cashier" model="res.groups">
+            <field name="name">Cashier</field>
+            <field name="category_id" ref="base.module_category_hidden"/>
+        </record>
+        <record id="group_cafe_waiter" model="res.groups">
+            <field name="name">Waiter</field>
+            <field name="category_id" ref="base.module_category_hidden"/>
+        </record>
+        <record id="group_cafe_kitchen" model="res.groups">
+            <field name="name">Kitchen</field>
+            <field name="category_id" ref="base.module_category_hidden"/>
+        </record>
+    </data>
+</odoo>

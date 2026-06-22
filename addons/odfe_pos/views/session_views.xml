@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_odfe_pos_session_tree" model="ir.ui.view">
+        <field name="name">odfe.pos.session.tree</field>
+        <field name="model">odfe.pos.session</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="employee_id"/>
+                <field name="status"/>
+                <field name="total_sales"/>
+                <field name="total_orders"/>
+                <field name="start_date"/>
+                <field name="end_date"/>
+            </tree>
+        </field>
+    </record>
+    <record id="view_odfe_pos_session_form" model="ir.ui.view">
+        <field name="name">odfe.pos.session.form</field>
+        <field name="model">odfe.pos.session</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_open" string="Open Session" type="object" states="draft" class="btn-primary"/>
+                    <button name="action_close" string="Close Session" type="object" states="opened" class="btn-warning"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="employee_id"/>
+                            <field name="status"/>
+                        </group>
+                        <group>
+                            <field name="opening_cash"/>
+                            <field name="closing_cash"/>
+                            <field name="start_date"/>
+                            <field name="end_date"/>
+                        </group>
+                    </group>
+                    <group string="Summary">
+                        <field name="total_sales"/>
+                        <field name="total_orders"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="action_odfe_pos_session" model="ir.actions.act_window">
+        <field name="name">POS Sessions</field>
+        <field name="res_model">odfe.pos.session</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem id="menu_odfe_pos_sessions" name="POS Sessions" parent="odfe_base.menu_odfe_pos_operations"
+              action="action_odfe_pos_session" sequence="60"/>
+</odoo>

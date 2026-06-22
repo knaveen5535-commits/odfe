@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_odfe_kitchen_order_admin,odfe.kitchen.order.admin,model_odfe_kitchen_order,odfe_auth.group_cafe_admin,1,1,1,1
+access_odfe_kitchen_order_kitchen,odfe.kitchen.order.kitchen,model_odfe_kitchen_order,odfe_auth.group_cafe_kitchen,1,1,0,0
+access_odfe_kitchen_item_admin,odfe.kitchen.item.admin,model_odfe_kitchen_item,odfe_auth.group_cafe_admin,1,1,1,1
+access_odfe_kitchen_item_kitchen,odfe.kitchen.item.kitchen,model_odfe_kitchen_item,odfe_auth.group_cafe_kitchen,1,1,0,0

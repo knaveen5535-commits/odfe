@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="uom_unit" model="odfe.uom">
+            <field name="name">Unit</field>
+            <field name="code">pc</field>
+            <field name="category">unit</field>
+        </record>
+        <record id="cat_coffee" model="odfe.product.category">
+            <field name="name">Coffee</field>
+            <field name="sequence">10</field>
+        </record>
+        <record id="cat_food" model="odfe.product.category">
+            <field name="name">Food</field>
+            <field name="sequence">20</field>
+        </record>
+        <record id="cat_beverages" model="odfe.product.category">
+            <field name="name">Beverages</field>
+            <field name="sequence">30</field>
+        </record>
+        <record id="tax_default" model="odfe.tax">
+            <field name="name">GST 5%</field>
+            <field name="rate">5</field>
+        </record>
+        <record id="product_espresso" model="odfe.product">
+            <field name="name">Espresso</field>
+            <field name="category_id" ref="cat_coffee"/>
+            <field name="uom_id" ref="uom_unit"/>
+            <field name="sale_price">3.50</field>
+            <field name="cost_price">1.00</field>
+            <field name="tax_id" ref="tax_default"/>
+            <field name="kitchen_category">beverage</field>
+        </record>
+        <record id="product_cappuccino" model="odfe.product">
+            <field name="name">Cappuccino</field>
+            <field name="category_id" ref="cat_coffee"/>
+            <field name="uom_id" ref="uom_unit"/>
+            <field name="sale_price">4.50</field>
+            <field name="cost_price">1.50</field>
+            <field name="tax_id" ref="tax_default"/>
+            <field name="kitchen_category">beverage</field>
+        </record>
+        <record id="product_latte" model="odfe.product">
+            <field name="name">Latte</field>
+            <field name="category_id" ref="cat_coffee"/>
+            <field name="uom_id" ref="uom_unit"/>
+            <field name="sale_price">5.00</field>
+            <field name="cost_price">1.75</field>
+            <field name="tax_id" ref="tax_default"/>
+            <field name="kitchen_category">beverage</field>
+        </record>
+        <record id="product_sandwich" model="odfe.product">
+            <field name="name">Club Sandwich</field>
+            <field name="category_id" ref="cat_food"/>
+            <field name="uom_id" ref="uom_unit"/>
+            <field name="sale_price">8.00</field>
+            <field name="cost_price">3.00</field>
+            <field name="tax_id" ref="tax_default"/>
+            <field name="kitchen_category">main</field>
+        </record>
+    </data>
+</odoo>

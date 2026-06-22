@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_odfe_order_tree" model="ir.ui.view">
+        <field name="name">odfe.order.tree</field>
+        <field name="model">odfe.order</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="order_ref"/>
+                <field name="session_id"/>
+                <field name="employee_id"/>
+                <field name="table_id"/>
+                <field name="total"/>
+                <field name="status"/>
+                <field name="order_date"/>
+            </tree>
+        </field>
+    </record>
+    <record id="view_odfe_order_form" model="ir.ui.view">
+        <field name="name">odfe.order.form</field>
+        <field name="model">odfe.order</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_confirm" string="Confirm" type="object" states="draft" class="btn-primary"/>
+                    <button name="action_paid" string="Mark Paid" type="object" states="confirmed,ready,served" class="btn-success"/>
+                    <button name="action_cancel" string="Cancel" type="object" states="draft,confirmed" class="btn-danger"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="order_ref"/>
+                            <field name="session_id"/>
+                            <field name="employee_id"/>
+                            <field name="customer_id"/>
+                        </group>
+                        <group>
+                            <field name="table_id"/>
+                            <field name="order_type"/>
+                            <field name="status"/>
+                            <field name="order_date"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="note"/>
+                    </group>
+                    <notebook>
+                        <page name="items" string="Order Items">
+                            <field name="order_line_ids">
+                                <tree>
+                                    <field name="product_id"/>
+                                    <field name="qty"/>
+                                    <field name="price_unit"/>
+                                    <field name="discount"/>
+                                    <field name="subtotal"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page name="payments" string="Payments">
+                            <field name="payment_ids">
+                                <tree>
+                                    <field name="payment_ref"/>
+                                    <field name="method_id"/>
+                                    <field name="amount"/>
+                                    <field name="status"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="action_odfe_order" model="ir.actions.act_window">
+        <field name="name">Orders</field>
+        <field name="res_model">odfe.order</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem id="menu_odfe_orders" name="Orders" parent="odfe_base.menu_odfe_pos_operations"
+              action="action_odfe_order" sequence="15"/>
+</odoo>

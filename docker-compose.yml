@@ -1,0 +1,62 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-odfe}
+      POSTGRES_USER: ${POSTGRES_USER:-odfe}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-odfe}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql
+      - ./database/seed.sql:/docker-entrypoint-initdb.d/02-seed.sql
+
+  odoo:
+    image: odoo:17
+    depends_on:
+      - postgres
+    environment:
+      HOST: postgres
+      USER: ${POSTGRES_USER:-odfe}
+      PASSWORD: ${POSTGRES_PASSWORD:-odfe}
+      DB_NAME: ${POSTGRES_DB:-odfe}
+    ports:
+      - "8069:8069"
+    volumes:
+      - ./addons:/mnt/extra-addons
+      - ./odoo.conf:/etc/odoo/odoo.conf
+
+  backend:
+    build: ./backend
+    depends_on:
+      - postgres
+      - redis
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-odfe}:${POSTGRES_PASSWORD:-odfe}@postgres:5432/${POSTGRES_DB:-odfe}
+      REDIS_URL: redis://redis:6379
+      JWT_SECRET: ${JWT_SECRET:-change-me}
+      PORT: 4000
+      NODE_ENV: production
+    ports:
+      - "4000:4000"
+
+  frontend:
+    build: ./frontend
+    depends_on:
+      - backend
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:4000/api
+      NEXT_PUBLIC_WS_URL: ws://localhost:4000/ws
+    ports:
+      - "3000:3000"
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+
+volumes:
+  postgres_data:

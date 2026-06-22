@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_odfe_guest_session_admin,odfe.guest.session.admin,model_odfe_guest_session,odfe_auth.group_cafe_admin,1,1,1,1
+access_odfe_guest_session_waiter,odfe.guest.session.waiter,model_odfe_guest_session,odfe_auth.group_cafe_waiter,1,0,0,0
+access_odfe_self_order_token_admin,odfe.self.order.token.admin,model_odfe_self_order_token,odfe_auth.group_cafe_admin,1,1,1,1

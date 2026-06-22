@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_odfe_kitchen_order_tree" model="ir.ui.view">
+        <field name="name">odfe.kitchen.order.tree</field>
+        <field name="model">odfe.kitchen.order</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="display_name"/>
+                <field name="table_name"/>
+                <field name="status"/>
+                <field name="priority"/>
+                <field name="item_count"/>
+                <field name="create_date"/>
+            </tree>
+        </field>
+    </record>
+    <record id="view_odfe_kitchen_order_form" model="ir.ui.view">
+        <field name="name">odfe.kitchen.order.form</field>
+        <field name="model">odfe.kitchen.order</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_prepare" string="Start Preparing" type="object" states="new" class="btn-warning"/>
+                    <button name="action_ready" string="Mark Ready" type="object" states="preparing" class="btn-success"/>
+                    <button name="action_serve" string="Mark Served" type="object" states="ready" class="btn-info"/>
+                    <button name="action_cancel" string="Cancel" type="object" states="new,preparing" class="btn-danger"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="display_name"/>
+                            <field name="order_id"/>
+                            <field name="table_name"/>
+                        </group>
+                        <group>
+                            <field name="status"/>
+                            <field name="priority"/>
+                            <field name="note"/>
+                        </group>
+                    </group>
+                    <field name="item_ids">
+                        <tree>
+                            <field name="product_name"/>
+                            <field name="qty"/>
+                            <field name="status"/>
+                            <field name="note"/>
+                        </tree>
+                    </field>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="action_odfe_kitchen_order" model="ir.actions.act_window">
+        <field name="name">Kitchen Orders</field>
+        <field name="res_model">odfe.kitchen.order</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem id="menu_odfe_kds" name="Kitchen Orders" parent="odfe_base.menu_odfe_pos_operations"
+              action="action_odfe_kitchen_order" sequence="40"/>
+</odoo>

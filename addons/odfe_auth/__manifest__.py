@@ -1,0 +1,20 @@
+{
+    'name': 'ODFE Auth',
+    'version': '1.0',
+    'category': 'Cafe/POS',
+    'summary': 'Employee authentication and role management',
+    'description': 'Handles employee login, role-based access control, and security groups for the cafe POS system.',
+    'depends': ['base', 'mail'],
+    'data': [
+        'security/odfe_security.xml',
+        'security/ir.model.access.csv',
+        'views/employee_views.xml',
+        'views/login_page.xml',
+        'views/landing_page.xml',
+    ],
+    'demo': [],
+    'installable': True,
+    'application': True,
+    'auto_install': False,
+    'license': 'LGPL-3',
+}

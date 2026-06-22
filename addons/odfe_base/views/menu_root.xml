@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_odfe_root" name="ODFE Cafe" sequence="10"
+              web_icon="odfe_base,static/src/img/icon.png"/>
+    <menuitem id="menu_odfe_pos_operations" name="POS Operations"
+              parent="menu_odfe_root" sequence="10"/>
+    <menuitem id="menu_odfe_human_resources" name="Human Resources"
+              parent="menu_odfe_root" sequence="20"/>
+    <menuitem id="menu_odfe_reports_main" name="Reports"
+              parent="menu_odfe_root" sequence="30"/>
+    <menuitem id="menu_odfe_configuration" name="Configuration"
+              parent="menu_odfe_root" sequence="40"/>
+</odoo>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_odfe_self_order_page" model="ir.ui.view">
+        <field name="name">ODFE Self Order Page</field>
+        <field name="type">qweb</field>
+        <field name="arch" type="xml">
+            <t t-name="odfe_self_order.self_order_page">
+                <div class="odfe-self-order">
+                    <header>
+                        <h1>Welcome to ODFE Cafe</h1>
+                        <p>Table: <t t-esc="session.table_id.name"/></p>
+                    </header>
+                    <div class="menu-container">
+                        <div class="categories">
+                            <t t-foreach="categories" t-as="cat">
+                                <button class="category-btn" t-att-data-cat-id="cat.id">
+                                    <t t-esc="cat.name"/>
+                                </button>
+                            </t>
+                        </div>
+                        <div class="products">
+                            <t t-foreach="products" t-as="product">
+                                <div class="product-card" t-att-data-product-id="product.id">
+                                    <h3 t-esc="product.name"/>
+                                    <p class="price">$<t t-esc="product.sale_price"/></p>
+                                    <t t-if="product.description">
+                                        <p class="desc" t-esc="product.description"/>
+                                    </t>
+                                    <button class="add-to-cart">Add to Cart</button>
+                                </div>
+                            </t>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </field>
+    </record>
+</odoo>

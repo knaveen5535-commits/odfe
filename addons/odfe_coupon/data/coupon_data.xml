@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="coupon_welcome10" model="odfe.coupon">
+            <field name="code">WELCOME10</field>
+            <field name="description">10% off for new customers</field>
+            <field name="discount_type">percentage</field>
+            <field name="discount_value">10</field>
+            <field name="valid_from" eval="(datetime.now() - timedelta(days=1)).strftime('%Y-%m-%d')"/>
+            <field name="valid_until" eval="(datetime.now() + timedelta(days=365)).strftime('%Y-%m-%d')"/>
+        </record>
+        <record id="coupon_flat50" model="odfe.coupon">
+            <field name="code">FLAT50</field>
+            <field name="description">Flat $50 off on orders above $500</field>
+            <field name="discount_type">fixed</field>
+            <field name="discount_value">50</field>
+            <field name="minimum_order">500</field>
+            <field name="valid_from" eval="(datetime.now() - timedelta(days=1)).strftime('%Y-%m-%d')"/>
+            <field name="valid_until" eval="(datetime.now() + timedelta(days=365)).strftime('%Y-%m-%d')"/>
+        </record>
+    </data>
+</odoo>

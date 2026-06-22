@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_odfe_coupon_tree" model="ir.ui.view">
+        <field name="name">odfe.coupon.tree</field>
+        <field name="model">odfe.coupon</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="code"/>
+                <field name="discount_type"/>
+                <field name="discount_value"/>
+                <field name="valid_from"/>
+                <field name="valid_until"/>
+                <field name="is_active"/>
+            </tree>
+        </field>
+    </record>
+    <record id="view_odfe_coupon_form" model="ir.ui.view">
+        <field name="name">odfe.coupon.form</field>
+        <field name="model">odfe.coupon</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="code"/>
+                            <field name="discount_type"/>
+                            <field name="discount_value"/>
+                            <field name="maximum_discount"/>
+                        </group>
+                        <group>
+                            <field name="minimum_order"/>
+                            <field name="usage_limit"/>
+                            <field name="usage_count"/>
+                            <field name="is_active"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="description"/>
+                    </group>
+                    <group>
+                        <field name="valid_from"/>
+                        <field name="valid_until"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="action_odfe_coupon" model="ir.actions.act_window">
+        <field name="name">Coupons</field>
+        <field name="res_model">odfe.coupon</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem id="menu_odfe_coupon" name="Coupons" parent="odfe_base.menu_odfe_configuration"
+              action="action_odfe_coupon" sequence="20"/>
+</odoo>

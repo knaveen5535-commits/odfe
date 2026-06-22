@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_odfe_sync_admin,odfe.sync.admin,model_odfe_sync,odfe_auth.group_cafe_admin,1,1,1,1
+access_odfe_notification_admin,odfe.notification.admin,model_odfe_notification,odfe_auth.group_cafe_admin,1,1,1,1
+access_odfe_notification_cashier,odfe.notification.cashier,model_odfe_notification,odfe_auth.group_cafe_cashier,1,0,0,0
+access_odfe_notification_waiter,odfe.notification.waiter,model_odfe_notification,odfe_auth.group_cafe_waiter,1,0,0,0
+access_odfe_notification_kitchen,odfe.notification.kitchen,model_odfe_notification,odfe_auth.group_cafe_kitchen,1,0,0,0

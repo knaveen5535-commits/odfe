@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_odfe_payment_tree" model="ir.ui.view">
+        <field name="name">odfe.payment.tree</field>
+        <field name="model">odfe.payment</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="payment_ref"/>
+                <field name="order_id"/>
+                <field name="method_id"/>
+                <field name="amount"/>
+                <field name="status"/>
+                <field name="payment_date"/>
+            </tree>
+        </field>
+    </record>
+    <record id="view_odfe_payment_form" model="ir.ui.view">
+        <field name="name">odfe.payment.form</field>
+        <field name="model">odfe.payment</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_complete" string="Complete" type="object" states="pending" class="btn-primary"/>
+                    <button name="action_fail" string="Mark Failed" type="object" states="pending" class="btn-danger"/>
+                    <button name="action_refund" string="Refund" type="object" states="completed" class="btn-warning"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="payment_ref"/>
+                            <field name="order_id"/>
+                            <field name="method_id"/>
+                        </group>
+                        <group>
+                            <field name="amount"/>
+                            <field name="tip_amount"/>
+                            <field name="change_amount"/>
+                            <field name="status"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="reference"/>
+                        <field name="notes"/>
+                        <field name="payment_date"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="action_odfe_payment" model="ir.actions.act_window">
+        <field name="name">Payments</field>
+        <field name="res_model">odfe.payment</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem id="menu_odfe_payment" name="Payments" parent="odfe_base.menu_odfe_pos_operations"
+              action="action_odfe_payment" sequence="50"/>
+</odoo>

@@ -1,0 +1,11 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_odfe_pos_session_admin,odfe.pos.session.admin,model_odfe_pos_session,odfe_auth.group_cafe_admin,1,1,1,1
+access_odfe_pos_session_cashier,odfe.pos.session.cashier,model_odfe_pos_session,odfe_auth.group_cafe_cashier,1,1,1,0
+access_odfe_order_admin,odfe.order.admin,model_odfe_order,odfe_auth.group_cafe_admin,1,1,1,1
+access_odfe_order_cashier,odfe.order.cashier,model_odfe_order,odfe_auth.group_cafe_cashier,1,1,1,1
+access_odfe_order_waiter,odfe.order.waiter,model_odfe_order,odfe_auth.group_cafe_waiter,1,1,1,0
+access_odfe_order_line_admin,odfe.order.line.admin,model_odfe_order_line,odfe_auth.group_cafe_admin,1,1,1,1
+access_odfe_order_line_cashier,odfe.order.line.cashier,model_odfe_order_line,odfe_auth.group_cafe_cashier,1,1,1,1
+access_odfe_receipt_admin,odfe.receipt.admin,model_odfe_receipt,odfe_auth.group_cafe_admin,1,1,1,1
+access_odfe_cart_admin,odfe.cart.admin,model_odfe_cart,odfe_auth.group_cafe_admin,1,1,1,1
+access_odfe_cart_line_admin,odfe.cart.line.admin,model_odfe_cart_line,odfe_auth.group_cafe_admin,1,1,1,1
