@@ -1,0 +1,45 @@
+@import './base/variables';
+@import './base/spacing';
+@import './base/typography';
+@import './base/animations';
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family-base);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+}
+
+p {
+  color: var(--text-secondary);
+  font-size: var(--font-size-body);
+}
+
+a {
+  color: var(--brown-primary);
+  text-decoration: none;
+  transition: color var(--anim-duration-short) var(--anim-ease-natural);
+
+  &:hover {
+    color: var(--hover-color);
+  }
+}
+
+button {
+  font-family: inherit;
+  border: none;
+  background: none;
+  cursor: pointer;
+}

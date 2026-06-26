@@ -21,7 +21,12 @@ export default function LoginPage() {
       if (data.success) {
         localStorage.setItem('accessToken', data.data.accessToken);
         localStorage.setItem('user', JSON.stringify(data.data.user));
-        router.push('/dashboard');
+        
+        const role = data.data.user.role;
+        if (role === 'ADMIN') router.push('/dashboard');
+        else if (role === 'CASHIER') router.push('/pos');
+        else if (role === 'KITCHEN_STAFF') router.push('/kitchen');
+        else router.push('/payments'); // Defaulting unknown roles like Billing to /payments or we can map them
       } else {
         setError(data.error || 'Login failed');
       }

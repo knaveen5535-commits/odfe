@@ -7,6 +7,11 @@ export function middleware(request: NextRequest) {
   const token = request.cookies.get('accessToken')?.value || request.headers.get('authorization')?.replace('Bearer ', '');
   const { pathname } = request.nextUrl;
 
+  // Landing page is always public
+  if (pathname === '/') {
+    return NextResponse.next();
+  }
+
   if (publicRoutes.some(r => pathname.startsWith(r))) {
     return NextResponse.next();
   }

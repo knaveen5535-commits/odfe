@@ -2,8 +2,10 @@ import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import cookieParser from 'cookie-parser';
+import { createServer } from 'http';
 import { PrismaClient } from '@prisma/client';
 import { errorHandler } from './middleware/error.middleware';
+import { initializeSocket } from './socket';
 import authRoutes from './routes/auth.routes';
 import productRoutes from './routes/product.routes';
 import categoryRoutes from './routes/category.routes';
@@ -51,9 +53,12 @@ app.get('/api/health', (_req, res) => {
 
 app.use(errorHandler);
 
+const httpServer = createServer(app);
+initializeSocket(httpServer);
+
 const PORT = parseInt(process.env.PORT || '4000', 10);
 
-app.listen(PORT, () => {
+httpServer.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
 
