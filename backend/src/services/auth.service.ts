@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from 'uuid';
 import { hashPassword, comparePassword } from '../utils/password';
 import { generateAccessToken, generateRefreshToken, verifyToken, TokenPayload } from '../utils/jwt';
 import { generateToken } from '../utils/crypto';
@@ -14,6 +15,13 @@ interface RegisterParams {
   role?: string;
 }
 
+const roleDepartmentMap: Record<string, string> = {
+  ADMIN: 'Management',
+  CASHIER: 'Cashier',
+  KITCHEN_STAFF: 'Kitchen',
+  BILLING: 'Billing',
+};
+
 export async function register(params: RegisterParams) {
   const existing = await userRepository.findByEmail(params.email);
   if (existing) throw new ConflictError('Email already registered');
@@ -24,18 +32,26 @@ export async function register(params: RegisterParams) {
     password: hashedPassword,
     firstName: params.firstName,
     lastName: params.lastName,
+    role: params.role as any,
   });
 
   const payload: TokenPayload = { userId: user.id, email: user.email, role: user.role };
   const accessToken = generateAccessToken(payload);
-  const refreshToken = generateRefreshToken(payload);
+  const refreshToken = `${generateRefreshToken(payload)}_${uuidv4()}`;
 
   const expiresAt = new Date();
   expiresAt.setDate(expiresAt.getDate() + 7);
   await refreshTokenRepository.create({ token: refreshToken, userId: user.id, expiresAt });
 
   return {
-    user: { id: user.id, email: user.email, firstName: user.firstName, lastName: user.lastName, role: user.role },
+    user: {
+      id: user.id,
+      email: user.email,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      role: user.role,
+      department: roleDepartmentMap[user.role] || '',
+    },
     accessToken,
     refreshToken,
   };
@@ -45,10 +61,10 @@ export async function login(email: string, password: string) {
   let user = await userRepository.findByEmail(email);
   if (!user) {
     const demoAccounts = [
-      { email: 'admin@odfe.local', pass: 'Admin@123', role: 'ADMIN', first: 'ODFE', last: 'Administrator' },
-      { email: 'cashier1@odfe.local', pass: 'Cashier@123', role: 'CASHIER', first: 'Main', last: 'Cashier' },
-      { email: 'kitchen@odfe.local', pass: 'Kitchen@123', role: 'KITCHEN_STAFF', first: 'Kitchen', last: 'Display' },
-      { email: 'billing@odfe.local', pass: 'Billing@123', role: 'billing', first: 'Billing', last: 'Desk' }
+      { email: 'admin@odfe.local', pass: 'Admin@123', role: 'ADMIN' as const, first: 'ODFE', last: 'Administrator' },
+      { email: 'cashier1@odfe.local', pass: 'Cashier@123', role: 'CASHIER' as const, first: 'Main', last: 'Cashier' },
+      { email: 'kitchen@odfe.local', pass: 'Kitchen@123', role: 'KITCHEN_STAFF' as const, first: 'Kitchen', last: 'Display' },
+      { email: 'billing@odfe.local', pass: 'Billing@123', role: 'BILLING' as const, first: 'Billing', last: 'Desk' }
     ];
     const demoAcc = demoAccounts.find(acc => acc.email === email && acc.pass === password);
     if (demoAcc) {
@@ -60,7 +76,7 @@ export async function login(email: string, password: string) {
           password: hashedPassword,
           firstName: demoAcc.first,
           lastName: demoAcc.last,
-          role: demoAcc.role as any,
+          role: demoAcc.role,
         }
       });
     } else {
@@ -73,14 +89,21 @@ export async function login(email: string, password: string) {
 
   const payload: TokenPayload = { userId: user.id, email: user.email, role: user.role };
   const accessToken = generateAccessToken(payload);
-  const refreshToken = generateRefreshToken(payload);
+  const refreshToken = `${generateRefreshToken(payload)}_${uuidv4()}`;
 
   const expiresAt = new Date();
   expiresAt.setDate(expiresAt.getDate() + 7);
   await refreshTokenRepository.create({ token: refreshToken, userId: user.id, expiresAt });
 
   return {
-    user: { id: user.id, email: user.email, firstName: user.firstName, lastName: user.lastName, role: user.role },
+    user: {
+      id: user.id,
+      email: user.email,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      role: user.role,
+      department: roleDepartmentMap[user.role] || '',
+    },
     accessToken,
     refreshToken,
   };
@@ -105,7 +128,7 @@ export async function refreshToken(token: string) {
 
   const newPayload: TokenPayload = { userId: payload.userId, email: payload.email, role: payload.role };
   const newAccessToken = generateAccessToken(newPayload);
-  const newRefreshToken = generateRefreshToken(newPayload);
+  const newRefreshToken = `${generateRefreshToken(newPayload)}_${uuidv4()}`;
 
   const expiresAt = new Date();
   expiresAt.setDate(expiresAt.getDate() + 7);

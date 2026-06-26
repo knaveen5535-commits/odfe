@@ -38,6 +38,7 @@ const auth_middleware_1 = require("../middleware/auth.middleware");
 const paymentController = __importStar(require("../controllers/payment.controller"));
 const router = (0, express_1.Router)();
 router.use(auth_middleware_1.authenticate);
+router.use((0, auth_middleware_1.authorize)('ADMIN', 'CASHIER', 'BILLING'));
 router.get('/', paymentController.getAll);
 router.get('/methods', paymentController.getMethods);
 router.get('/:id', paymentController.getById);

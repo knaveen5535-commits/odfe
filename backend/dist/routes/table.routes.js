@@ -38,6 +38,7 @@ const auth_middleware_1 = require("../middleware/auth.middleware");
 const tableController = __importStar(require("../controllers/table.controller"));
 const router = (0, express_1.Router)();
 router.use(auth_middleware_1.authenticate);
+router.use((0, auth_middleware_1.authorize)('ADMIN', 'CASHIER'));
 router.get('/', tableController.getAll);
 router.get('/:id', tableController.getById);
 router.put('/:id/status', tableController.updateStatus);

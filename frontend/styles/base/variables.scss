@@ -1,34 +1,27 @@
 :root {
-  // Primary Background
-  --bg-primary: #E8E3D3;
-  // Secondary Background
-  --bg-secondary: #AEB59A;
-  
-  // Primary Brown
-  --brown-primary: #A16C3A;
-  // Dark Brown
-  --brown-dark: #652304;
-  
-  // Primary Text
-  --text-primary: #2A2118;
-  // Secondary Text
-  --text-secondary: #6F6459;
-  
-  // Border
-  --border-color: rgba(101, 35, 4, 0.12);
-  // Glass
-  --glass-bg: rgba(255, 255, 255, 0.45);
-  // Hover
-  --hover-color: #B57B45;
-  // Shadow
-  --shadow-color: rgba(60, 40, 20, 0.08);
+  --bg-primary: #F8F4EA;
+  --bg-secondary: #E7DDCF;
 
-  // Glass specific
+  --brown-primary: #A56A2B;
+  --brown-dark: #8B5A2B;
+
+  --text-primary: #2C1810;
+  --text-secondary: #6B5B4F;
+
+  --border-color: #E7DDCF;
+
+  --glass-bg: rgba(255, 255, 255, 0.45);
+  --hover-color: #8B5A2B;
+  --shadow-color: rgba(44, 24, 16, 0.08);
+
   --glass-blur: 18px;
   --glass-border: 1px solid rgba(255, 255, 255, 0.35);
-  --glass-shadow: 0 10px 30px rgba(60, 40, 20, 0.08);
+  --glass-shadow: 0 10px 30px rgba(44, 24, 16, 0.08);
   --glass-radius: 18px;
-  
-  // Forms
+
   --input-radius: 14px;
+
+  --success: #16A34A;
+  --warning: #D97706;
+  --danger: #DC2626;
 }

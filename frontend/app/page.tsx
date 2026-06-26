@@ -3,23 +3,52 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import styles from '../styles/pages/Landing.module.scss';
+import { getRedirectPath } from '@/context/AuthContext';
 
 export default function LandingPage() {
   const router = useRouter();
 
   useEffect(() => {
-    const userStr = localStorage.getItem('user');
-    if (userStr) {
+    async function validateSession() {
+      const token = localStorage.getItem('accessToken');
+      if (!token) return;
+
       try {
-        const user = JSON.parse(userStr);
-        if (user.role === 'ADMIN') router.push('/dashboard');
-        else if (user.role === 'CASHIER') router.push('/pos');
-        else if (user.role === 'KITCHEN_STAFF') router.push('/kitchen');
-        else router.push('/payments'); 
-      } catch (e) {
-        console.error(e);
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api'}/auth/profile`,
+          { headers: { Authorization: `Bearer ${token}` }, credentials: 'include' },
+        );
+        const data = await res.json();
+        if (data.success) {
+          const user = data.data?.user || data.user;
+          if (user) {
+            const path = getRedirectPath(user.role, user.department);
+            router.replace(path);
+            return;
+          }
+        }
+      } catch {
+        // Backend unreachable — check localStorage fallback
+        const userStr = localStorage.getItem('user');
+        if (token && userStr) {
+          try {
+            const user = JSON.parse(userStr);
+            router.replace(getRedirectPath(user.role, user.department));
+            return;
+          } catch { /* ignore parse errors */ }
+        }
       }
+
+      // Session invalid — clean up
+      localStorage.removeItem('accessToken');
+      localStorage.removeItem('user');
+      localStorage.removeItem('role');
+      localStorage.removeItem('department');
+      document.cookie = 'accessToken=; path=/; max-age=0; SameSite=Strict';
+      document.cookie = 'userRole=; path=/; max-age=0; SameSite=Strict';
     }
+
+    validateSession();
   }, [router]);
 
   return (

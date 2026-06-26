@@ -26,6 +26,7 @@ export declare const userRepository: {
         password: string;
         firstName?: string;
         lastName?: string;
+        role?: string;
     }): import(".prisma/client").Prisma.Prisma__UserClient<{
         id: string;
         email: string;

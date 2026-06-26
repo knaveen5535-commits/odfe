@@ -1,10 +1,11 @@
 import { Router } from 'express';
-import { authenticate } from '../middleware/auth.middleware';
+import { authenticate, authorize } from '../middleware/auth.middleware';
 import * as couponController from '../controllers/coupon.controller';
 
 const router = Router();
 
 router.use(authenticate);
+router.use(authorize('ADMIN', 'CASHIER'));
 router.get('/', couponController.getAll);
 router.get('/:id', couponController.getById);
 router.post('/', couponController.create);

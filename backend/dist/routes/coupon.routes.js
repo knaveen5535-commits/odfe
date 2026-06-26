@@ -38,6 +38,7 @@ const auth_middleware_1 = require("../middleware/auth.middleware");
 const couponController = __importStar(require("../controllers/coupon.controller"));
 const router = (0, express_1.Router)();
 router.use(auth_middleware_1.authenticate);
+router.use((0, auth_middleware_1.authorize)('ADMIN', 'CASHIER'));
 router.get('/', couponController.getAll);
 router.get('/:id', couponController.getById);
 router.post('/', couponController.create);

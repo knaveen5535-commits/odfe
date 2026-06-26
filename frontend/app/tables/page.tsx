@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
-import Sidebar from '@/components/Navbar';
+import Sidebar from '@/components/Sidebar';
 import { useRouter } from 'next/navigation';
 
 interface TableData { 
@@ -30,7 +30,7 @@ export default function TablesPage() {
     return () => clearInterval(id);
   }, []);
 
-  const statusColors: Record<string, string> = { AVAILABLE: 'bg-green-500', OCCUPIED: 'bg-red-500', RESERVED: 'bg-yellow-500', CLEANING: 'bg-blue-500', UNAVAILABLE: 'bg-gray-500' };
+  const statusColors: Record<string, string> = { AVAILABLE: 'bg-success', OCCUPIED: 'bg-primary', RESERVED: 'bg-warning', CLEANING: 'bg-primary', UNAVAILABLE: 'bg-secondary-text' };
 
   const handleContextMenu = (e: React.MouseEvent, tableId: string) => {
     e.preventDefault();
@@ -48,17 +48,17 @@ export default function TablesPage() {
   };
 
   return (
-    <div className="flex h-screen bg-gray-100" onClick={() => setContextMenu(null)}>
+    <div className="flex h-screen bg-background" onClick={() => setContextMenu(null)}>
       <Sidebar />
       <div className="flex-1 p-8 overflow-auto">
-        <h1 className="text-2xl font-bold mb-6">Floor Plan</h1>
+        <h1 className="text-2xl font-bold text-[#2B1D15] mb-6">Floor Plan</h1>
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {tables.map(t => {
             const currentOrder = t.orders && t.orders.length > 0 ? t.orders[0] : null;
             return (
               <div 
                 key={t.id} 
-                className={`rounded-xl shadow-lg p-6 text-white cursor-pointer transform transition hover:scale-105 ${statusColors[t.status] || 'bg-gray-500'}`}
+                className={`rounded-xl shadow-lg p-6 text-white cursor-pointer transform transition hover:scale-105 ${statusColors[t.status] || 'bg-secondary-text'}`}
                 onContextMenu={(e) => handleContextMenu(e, t.id)}
                 onClick={() => router.push(`/pos?tableId=${t.id}`)}
               >
@@ -79,14 +79,14 @@ export default function TablesPage() {
 
       {contextMenu && (
         <div 
-          className="fixed bg-white rounded-lg shadow-xl py-2 w-48 z-50 border border-gray-200"
+          className="fixed bg-surface rounded-lg shadow-xl py-2 w-48 z-50 border border-border"
           style={{ top: contextMenu.y, left: contextMenu.x }}
         >
-          <button className="w-full text-left px-4 py-2 hover:bg-gray-100 text-sm text-gray-800" onClick={() => updateTableStatus(contextMenu.tableId, 'RESERVED')}>Reserve</button>
-          <button className="w-full text-left px-4 py-2 hover:bg-gray-100 text-sm text-gray-800" onClick={() => updateTableStatus(contextMenu.tableId, 'AVAILABLE')}>Release</button>
-          <button className="w-full text-left px-4 py-2 hover:bg-gray-100 text-sm text-gray-800" onClick={() => updateTableStatus(contextMenu.tableId, 'CLEANING')}>Cleaning</button>
-          <button className="w-full text-left px-4 py-2 hover:bg-gray-100 text-sm text-gray-800" onClick={() => { setContextMenu(null); alert('Change Waiter not implemented yet'); }}>Change Waiter</button>
-          <button className="w-full text-left px-4 py-2 hover:bg-gray-100 text-sm text-gray-800" onClick={() => { setContextMenu(null); alert('Merge Tables not implemented yet'); }}>Merge Tables</button>
+          <button className="w-full text-left px-4 py-2 hover:bg-background text-sm text-[#2B1D15]" onClick={() => updateTableStatus(contextMenu.tableId, 'RESERVED')}>Reserve</button>
+          <button className="w-full text-left px-4 py-2 hover:bg-background text-sm text-[#2B1D15]" onClick={() => updateTableStatus(contextMenu.tableId, 'AVAILABLE')}>Release</button>
+          <button className="w-full text-left px-4 py-2 hover:bg-background text-sm text-[#2B1D15]" onClick={() => updateTableStatus(contextMenu.tableId, 'CLEANING')}>Cleaning</button>
+          <button className="w-full text-left px-4 py-2 hover:bg-background text-sm text-[#2B1D15]" onClick={() => { setContextMenu(null); alert('Change Waiter not implemented yet'); }}>Change Waiter</button>
+          <button className="w-full text-left px-4 py-2 hover:bg-background text-sm text-[#2B1D15]" onClick={() => { setContextMenu(null); alert('Merge Tables not implemented yet'); }}>Merge Tables</button>
         </div>
       )}
     </div>

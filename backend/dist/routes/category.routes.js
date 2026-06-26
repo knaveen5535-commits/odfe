@@ -40,8 +40,8 @@ const router = (0, express_1.Router)();
 router.use(auth_middleware_1.authenticate);
 router.get('/', categoryController.getAll);
 router.get('/:id', categoryController.getById);
-router.post('/', categoryController.create);
-router.put('/:id', categoryController.update);
-router.delete('/:id', categoryController.remove);
+router.post('/', (0, auth_middleware_1.authorize)('ADMIN'), categoryController.create);
+router.put('/:id', (0, auth_middleware_1.authorize)('ADMIN'), categoryController.update);
+router.delete('/:id', (0, auth_middleware_1.authorize)('ADMIN'), categoryController.remove);
 exports.default = router;
 //# sourceMappingURL=category.routes.js.map

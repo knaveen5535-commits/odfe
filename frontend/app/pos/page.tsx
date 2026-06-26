@@ -1,5 +1,7 @@
 'use client';
 import { useState, useEffect, useCallback } from 'react';
+import { useRouter } from 'next/navigation';
+import { LogOut, Coffee } from 'lucide-react';
 import styles from './POS.module.scss';
 
 interface Product {
@@ -17,12 +19,23 @@ interface CartItem {
 }
 
 export default function POSPage() {
+  const router = useRouter();
   const [products, setProducts] = useState<Product[]>([]);
   const [cart, setCart] = useState<CartItem[]>([]);
   const [activeCategory, setActiveCategory] = useState<string>('all');
   const [selectedPayment, setSelectedPayment] = useState<string>('');
 
   const token = typeof window !== 'undefined' ? localStorage.getItem('accessToken') : null;
+
+  const handleLogout = () => {
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('user');
+    localStorage.removeItem('role');
+    localStorage.removeItem('department');
+    document.cookie = 'accessToken=; path=/; max-age=0; SameSite=Strict';
+    document.cookie = 'userRole=; path=/; max-age=0; SameSite=Strict';
+    router.replace('/');
+  };
 
   useEffect(() => {
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/products`, {
@@ -80,7 +93,18 @@ export default function POSPage() {
 
   return (
     <div className={styles.posLayout}>
-      <div className={styles.mainColumn}>
+      <header className={styles.posHeader}>
+        <div className={styles.posHeaderLeft}>
+          <Coffee size={22} className={styles.posHeaderIcon} />
+          <span className={styles.posHeaderTitle}>ODFE POS</span>
+        </div>
+        <button onClick={handleLogout} className={styles.logoutBtn}>
+          <LogOut size={16} />
+          Logout
+        </button>
+      </header>
+      <div className={styles.posColumns}>
+        <div className={styles.mainColumn}>
         <div className={styles.categoryBar}>
           <button
             className={`${styles.categoryChip} ${activeCategory === 'all' ? styles.active : ''}`}
@@ -154,6 +178,7 @@ export default function POSPage() {
         >
           {cart.length === 0 ? 'Add Items' : !selectedPayment ? 'Select Payment' : `Charge $${total.toFixed(2)}`}
         </button>
+      </div>
       </div>
     </div>
   );

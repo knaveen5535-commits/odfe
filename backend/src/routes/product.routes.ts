@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { authenticate } from '../middleware/auth.middleware';
+import { authenticate, authorize } from '../middleware/auth.middleware';
 import * as productController from '../controllers/product.controller';
 
 const router = Router();
@@ -7,8 +7,8 @@ const router = Router();
 router.use(authenticate);
 router.get('/', productController.getAll);
 router.get('/:id', productController.getById);
-router.post('/', productController.create);
-router.put('/:id', productController.update);
-router.delete('/:id', productController.remove);
+router.post('/', authorize('ADMIN'), productController.create);
+router.put('/:id', authorize('ADMIN'), productController.update);
+router.delete('/:id', authorize('ADMIN'), productController.remove);
 
 export default router;

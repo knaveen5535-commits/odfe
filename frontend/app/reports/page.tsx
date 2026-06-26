@@ -1,6 +1,6 @@
 'use client';
 import { useState } from 'react';
-import Sidebar from '@/components/Navbar';
+import Sidebar from '@/components/Sidebar';
 
 export default function ReportsPage() {
   const [reportType, setReportType] = useState('sales');
@@ -19,15 +19,15 @@ export default function ReportsPage() {
   };
 
   return (
-    <div className="flex h-screen bg-gray-100">
+    <div className="flex h-screen bg-background">
       <Sidebar />
       <div className="flex-1 p-8 overflow-auto">
-        <h1 className="text-2xl font-bold mb-6">Reports</h1>
-        <div className="bg-white rounded-lg shadow p-6 max-w-lg">
+        <h1 className="text-2xl font-bold text-[#2B1D15] mb-6">Reports</h1>
+        <div className="bg-surface rounded-lg shadow border border-border p-6 max-w-lg">
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700">Report Type</label>
-              <select value={reportType} onChange={e => setReportType(e.target.value)} className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2">
+              <label className="block text-sm font-medium text-[#2B1D15]">Report Type</label>
+              <select value={reportType} onChange={e => setReportType(e.target.value)} className="mt-1 block w-full rounded-md border border-border px-3 py-2 text-[#2B1D15] bg-background">
                 <option value="sales">Sales Report</option>
                 <option value="revenue">Revenue Report</option>
                 <option value="employee">Employee Report</option>
@@ -35,14 +35,14 @@ export default function ReportsPage() {
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700">From Date</label>
-              <input type="date" value={dateFrom} onChange={e => setDateFrom(e.target.value)} className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2" />
+              <label className="block text-sm font-medium text-[#2B1D15]">From Date</label>
+              <input type="date" value={dateFrom} onChange={e => setDateFrom(e.target.value)} className="mt-1 block w-full rounded-md border border-border px-3 py-2 text-[#2B1D15] bg-background" />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700">To Date</label>
-              <input type="date" value={dateTo} onChange={e => setDateTo(e.target.value)} className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2" />
+              <label className="block text-sm font-medium text-[#2B1D15]">To Date</label>
+              <input type="date" value={dateTo} onChange={e => setDateTo(e.target.value)} className="mt-1 block w-full rounded-md border border-border px-3 py-2 text-[#2B1D15] bg-background" />
             </div>
-            <button onClick={generateReport} className="w-full bg-blue-600 text-white rounded-md py-2 hover:bg-blue-700">Generate Report</button>
+            <button onClick={generateReport} className="w-full bg-primary text-white rounded-md py-2 hover:bg-primary-hover transition">Generate Report</button>
           </div>
         </div>
       </div>

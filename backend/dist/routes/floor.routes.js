@@ -5,6 +5,7 @@ const auth_middleware_1 = require("../middleware/auth.middleware");
 const index_1 = require("../index");
 const router = (0, express_1.Router)();
 router.use(auth_middleware_1.authenticate);
+router.use((0, auth_middleware_1.authorize)('ADMIN', 'CASHIER'));
 router.get('/', async (_req, res) => {
     const floors = await index_1.prisma.floor.findMany({ include: { tables: { orderBy: { sequence: 'asc' } } } });
     res.json({ success: true, data: floors });

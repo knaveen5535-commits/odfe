@@ -8,6 +8,10 @@ interface ApiOptions {
   headers?: Record<string, string>;
 }
 
+function setCookie(name: string, value: string, maxAge: number) {
+  document.cookie = `${name}=${value}; path=/; max-age=${maxAge}; SameSite=Strict`;
+}
+
 async function refreshAccessToken(): Promise<string | null> {
   try {
     const res = await fetch(`${API_URL}/auth/refresh`, {
@@ -18,6 +22,7 @@ async function refreshAccessToken(): Promise<string | null> {
     const data = await res.json();
     if (data.success && data.data?.accessToken) {
       setAccessToken(data.data.accessToken);
+      setCookie('accessToken', data.data.accessToken, 86400);
       return data.data.accessToken;
     }
     return null;

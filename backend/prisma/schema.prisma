@@ -12,6 +12,7 @@ enum RoleType {
   CASHIER
   WAITER
   KITCHEN_STAFF
+  BILLING
 }
 
 enum OrderStatus {

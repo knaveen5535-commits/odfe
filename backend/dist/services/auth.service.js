@@ -38,6 +38,7 @@ exports.login = login;
 exports.refreshToken = refreshToken;
 exports.requestPasswordReset = requestPasswordReset;
 exports.resetPassword = resetPassword;
+const uuid_1 = require("uuid");
 const password_1 = require("../utils/password");
 const jwt_1 = require("../utils/jwt");
 const crypto_1 = require("../utils/crypto");
@@ -45,6 +46,12 @@ const user_repository_1 = require("../repositories/user.repository");
 const refresh_token_repository_1 = require("../repositories/refresh-token.repository");
 const password_reset_token_repository_1 = require("../repositories/password-reset-token.repository");
 const errors_1 = require("../utils/errors");
+const roleDepartmentMap = {
+    ADMIN: 'Management',
+    CASHIER: 'Cashier',
+    KITCHEN_STAFF: 'Kitchen',
+    BILLING: 'Billing',
+};
 async function register(params) {
     const existing = await user_repository_1.userRepository.findByEmail(params.email);
     if (existing)
@@ -55,15 +62,23 @@ async function register(params) {
         password: hashedPassword,
         firstName: params.firstName,
         lastName: params.lastName,
+        role: params.role,
     });
     const payload = { userId: user.id, email: user.email, role: user.role };
     const accessToken = (0, jwt_1.generateAccessToken)(payload);
-    const refreshToken = (0, jwt_1.generateRefreshToken)(payload);
+    const refreshToken = `${(0, jwt_1.generateRefreshToken)(payload)}_${(0, uuid_1.v4)()}`;
     const expiresAt = new Date();
     expiresAt.setDate(expiresAt.getDate() + 7);
     await refresh_token_repository_1.refreshTokenRepository.create({ token: refreshToken, userId: user.id, expiresAt });
     return {
-        user: { id: user.id, email: user.email, firstName: user.firstName, lastName: user.lastName, role: user.role },
+        user: {
+            id: user.id,
+            email: user.email,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            role: user.role,
+            department: roleDepartmentMap[user.role] || '',
+        },
         accessToken,
         refreshToken,
     };
@@ -75,7 +90,7 @@ async function login(email, password) {
             { email: 'admin@odfe.local', pass: 'Admin@123', role: 'ADMIN', first: 'ODFE', last: 'Administrator' },
             { email: 'cashier1@odfe.local', pass: 'Cashier@123', role: 'CASHIER', first: 'Main', last: 'Cashier' },
             { email: 'kitchen@odfe.local', pass: 'Kitchen@123', role: 'KITCHEN_STAFF', first: 'Kitchen', last: 'Display' },
-            { email: 'billing@odfe.local', pass: 'Billing@123', role: 'billing', first: 'Billing', last: 'Desk' }
+            { email: 'billing@odfe.local', pass: 'Billing@123', role: 'BILLING', first: 'Billing', last: 'Desk' }
         ];
         const demoAcc = demoAccounts.find(acc => acc.email === email && acc.pass === password);
         if (demoAcc) {
@@ -100,12 +115,19 @@ async function login(email, password) {
         throw new errors_1.UnauthorizedError('Invalid credentials');
     const payload = { userId: user.id, email: user.email, role: user.role };
     const accessToken = (0, jwt_1.generateAccessToken)(payload);
-    const refreshToken = (0, jwt_1.generateRefreshToken)(payload);
+    const refreshToken = `${(0, jwt_1.generateRefreshToken)(payload)}_${(0, uuid_1.v4)()}`;
     const expiresAt = new Date();
     expiresAt.setDate(expiresAt.getDate() + 7);
     await refresh_token_repository_1.refreshTokenRepository.create({ token: refreshToken, userId: user.id, expiresAt });
     return {
-        user: { id: user.id, email: user.email, firstName: user.firstName, lastName: user.lastName, role: user.role },
+        user: {
+            id: user.id,
+            email: user.email,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            role: user.role,
+            department: roleDepartmentMap[user.role] || '',
+        },
         accessToken,
         refreshToken,
     };
@@ -128,7 +150,7 @@ async function refreshToken(token) {
     await refresh_token_repository_1.refreshTokenRepository.revokeUserTokens(storedToken.userId);
     const newPayload = { userId: payload.userId, email: payload.email, role: payload.role };
     const newAccessToken = (0, jwt_1.generateAccessToken)(newPayload);
-    const newRefreshToken = (0, jwt_1.generateRefreshToken)(newPayload);
+    const newRefreshToken = `${(0, jwt_1.generateRefreshToken)(newPayload)}_${(0, uuid_1.v4)()}`;
     const expiresAt = new Date();
     expiresAt.setDate(expiresAt.getDate() + 7);
     await refresh_token_repository_1.refreshTokenRepository.create({ token: newRefreshToken, userId: payload.userId, expiresAt });

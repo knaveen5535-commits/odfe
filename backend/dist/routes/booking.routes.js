@@ -38,6 +38,7 @@ const auth_middleware_1 = require("../middleware/auth.middleware");
 const bookingController = __importStar(require("../controllers/booking.controller"));
 const router = (0, express_1.Router)();
 router.use(auth_middleware_1.authenticate);
+router.use((0, auth_middleware_1.authorize)('ADMIN'));
 router.get('/', bookingController.getAll);
 router.get('/:id', bookingController.getById);
 router.post('/', bookingController.create);

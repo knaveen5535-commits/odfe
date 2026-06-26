@@ -38,6 +38,7 @@ const auth_middleware_1 = require("../middleware/auth.middleware");
 const settingsController = __importStar(require("../controllers/settings.controller"));
 const router = (0, express_1.Router)();
 router.use(auth_middleware_1.authenticate);
+router.use((0, auth_middleware_1.authorize)('ADMIN'));
 router.get('/', settingsController.getSettings);
 router.put('/', settingsController.updateSettings);
 exports.default = router;

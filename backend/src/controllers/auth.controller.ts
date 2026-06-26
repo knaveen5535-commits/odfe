@@ -9,6 +9,7 @@ const registerSchema = z.object({
   password: z.string().min(8),
   firstName: z.string().optional(),
   lastName: z.string().optional(),
+  role: z.string().optional(),
 });
 
 const loginSchema = z.object({
@@ -18,8 +19,14 @@ const loginSchema = z.object({
 
 export async function register(req: Request, res: Response): Promise<void> {
   const data = registerSchema.parse(req.body);
-  const result = await authService.register(data);
-  res.status(201).json({ success: true, data: result });
+  const result = await authService.register({ ...data, role: data.role || 'ADMIN' });
+  res.cookie('refreshToken', result.refreshToken, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'strict',
+    maxAge: 7 * 24 * 60 * 60 * 1000,
+  });
+  res.status(201).json({ success: true, data: { accessToken: result.accessToken, user: result.user } });
 }
 
 export async function login(req: Request, res: Response): Promise<void> {
@@ -65,10 +72,21 @@ export async function resetPassword(req: Request, res: Response): Promise<void> 
   res.json({ success: true, message: 'Password reset successfully' });
 }
 
+const roleDepartmentMap: Record<string, string> = {
+  ADMIN: 'Management',
+  CASHIER: 'Cashier',
+  KITCHEN_STAFF: 'Kitchen',
+  BILLING: 'Billing',
+};
+
 export async function getProfile(req: Request, res: Response): Promise<void> {
   const user = await prisma.user.findUnique({
     where: { id: req.user!.userId },
     select: { id: true, email: true, firstName: true, lastName: true, role: true },
   });
-  res.json({ success: true, data: user });
+  if (!user) throw new AppError(404, 'User not found');
+  res.json({
+    success: true,
+    data: { ...user, department: roleDepartmentMap[user.role] || '' },
+  });
 }

@@ -38,6 +38,7 @@ const auth_middleware_1 = require("../middleware/auth.middleware");
 const promotionController = __importStar(require("../controllers/promotion.controller"));
 const router = (0, express_1.Router)();
 router.use(auth_middleware_1.authenticate);
+router.use((0, auth_middleware_1.authorize)('ADMIN'));
 router.get('/', promotionController.getAll);
 router.get('/:id', promotionController.getById);
 router.post('/', promotionController.create);

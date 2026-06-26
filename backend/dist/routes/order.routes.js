@@ -38,6 +38,7 @@ const auth_middleware_1 = require("../middleware/auth.middleware");
 const orderController = __importStar(require("../controllers/order.controller"));
 const router = (0, express_1.Router)();
 router.use(auth_middleware_1.authenticate);
+router.use((0, auth_middleware_1.authorize)('ADMIN', 'CASHIER', 'KITCHEN'));
 router.get('/', orderController.getAll);
 router.get('/:id', orderController.getById);
 router.post('/', orderController.create);

@@ -12,6 +12,7 @@ export declare function register(params: RegisterParams): Promise<{
         firstName: string | null;
         lastName: string | null;
         role: import(".prisma/client").$Enums.RoleType;
+        department: string;
     };
     accessToken: string;
     refreshToken: string;
@@ -23,6 +24,7 @@ export declare function login(email: string, password: string): Promise<{
         firstName: string | null;
         lastName: string | null;
         role: import(".prisma/client").$Enums.RoleType;
+        department: string;
     };
     accessToken: string;
     refreshToken: string;

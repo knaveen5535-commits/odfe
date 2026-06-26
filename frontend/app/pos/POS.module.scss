@@ -1,8 +1,60 @@
 .posLayout {
-  display: grid;
-  grid-template-columns: 1fr 360px 320px;
+  display: flex;
+  flex-direction: column;
   height: 100vh;
   background-color: var(--bg-primary);
+  overflow: hidden;
+}
+
+.posHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px;
+  background: #fff;
+  border-bottom: 1px solid var(--border-color);
+  flex-shrink: 0;
+}
+
+.posHeaderLeft {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.posHeaderIcon {
+  color: var(--brown-primary);
+}
+
+.posHeaderTitle {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--brown-dark);
+}
+
+.logoutBtn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s;
+  cursor: pointer;
+
+  &:hover {
+    background: #fee2e2;
+    color: #dc2626;
+  }
+}
+
+.posColumns {
+  display: grid;
+  grid-template-columns: 1fr 360px 320px;
+  flex: 1;
   overflow: hidden;
 }
 
