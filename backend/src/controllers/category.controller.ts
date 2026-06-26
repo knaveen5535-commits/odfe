@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { prisma } from '../index';
 import { NotFoundError } from '../utils/errors';
 
-export async function getAll(req: Request, res: Response): Promise<void> {
+export async function getAll(_req: Request, res: Response): Promise<void> {
   const categories = await prisma.category.findMany({ include: { children: true, _count: { select: { products: true } } } });
   res.json({ success: true, data: categories });
 }

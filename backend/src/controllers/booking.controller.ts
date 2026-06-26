@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { prisma } from '../index';
 import { NotFoundError } from '../utils/errors';
 
-export async function getAll(req: Request, res: Response): Promise<void> {
+export async function getAll(_req: Request, res: Response): Promise<void> {
   const bookings = await prisma.booking.findMany({ include: { customer: true, table: true } });
   res.json({ success: true, data: bookings });
 }

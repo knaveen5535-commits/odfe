@@ -68,15 +68,15 @@ export function useSocket(options: UseSocketOptions = {}) {
     socketRef.current?.emit(event, data);
   }, []);
 
-  const on = useCallback((event: string, callback: (...args: unknown[]) => void) => {
-    socketRef.current?.on(event, callback);
+  const on = useCallback(<T extends unknown[]>(event: string, callback: (...args: T) => void) => {
+    (socketRef.current?.on as (event: string, callback: (...args: T) => void) => void)(event, callback);
     return () => {
-      socketRef.current?.off(event, callback);
+      (socketRef.current?.off as (event: string, callback: (...args: T) => void) => void)(event, callback);
     };
   }, []);
 
-  const off = useCallback((event: string, callback?: (...args: unknown[]) => void) => {
-    socketRef.current?.off(event, callback);
+  const off = useCallback(<T extends unknown[]>(event: string, callback?: (...args: T) => void) => {
+    (socketRef.current?.off as (event: string, callback?: (...args: T) => void) => void)(event, callback);
   }, []);
 
   const joinRoom = useCallback((room: string) => {
@@ -110,7 +110,7 @@ export function useSocket(options: UseSocketOptions = {}) {
   };
 }
 
-export function useSocketEvent(event: string, callback: (...args: unknown[]) => void) {
+export function useSocketEvent<T extends unknown[]>(event: string, callback: (...args: T) => void) {
   const { on, off } = useSocket({ autoConnect: true });
 
   useEffect(() => {
@@ -150,7 +150,7 @@ export function useKitchenOrders() {
 
     const handleOrderUpdate = (data: { id: string; status: string }) => {
       setOrders(prev => prev.map(o => 
-        (o as { id: string }).id === data.id ? { ...o, status: data.status } : o
+        (o as { id: string }).id === data.id ? { ...(o as Record<string, unknown>), status: data.status } : o
       ));
     };
 
@@ -225,7 +225,7 @@ export function useFloorTables(floorId: string) {
         const index = prev.findIndex(t => (t as { id: string }).id === data.tableId);
         if (index >= 0) {
           const updated = [...prev];
-          updated[index] = { ...updated[index], status: data.status, orderId: data.orderId };
+          updated[index] = { ...(updated[index] as Record<string, unknown>), status: data.status, orderId: data.orderId };
           return updated;
         }
         return prev;

@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { prisma } from '../index';
 import { NotFoundError } from '../utils/errors';
 
-export async function getAll(req: Request, res: Response): Promise<void> {
+export async function getAll(_req: Request, res: Response): Promise<void> {
   const employees = await prisma.employee.findMany({ include: { role: true, user: { select: { email: true } } } });
   res.json({ success: true, data: employees });
 }

@@ -8,7 +8,7 @@ interface AuthenticatedSocket extends Socket {
 
 const connectedUsers = new Map<string, Set<string>>();
 
-let ioInstance: ReturnType<typeof Server.prototype> | null = null;
+let ioInstance: Server | null = null;
 
 export function initializeSocket(httpServer: HttpServer) {
   const io = new Server(httpServer, {

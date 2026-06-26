@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { prisma } from '../index';
 import { NotFoundError } from '../utils/errors';
 
-export async function getAll(req: Request, res: Response): Promise<void> {
+export async function getAll(_req: Request, res: Response): Promise<void> {
   const payments = await prisma.payment.findMany({
     include: { order: true, method: true },
     orderBy: { paymentDate: 'desc' },
@@ -39,7 +39,7 @@ export async function refund(req: Request, res: Response): Promise<void> {
   res.json({ success: true, data: payment });
 }
 
-export async function getMethods(req: Request, res: Response): Promise<void> {
+export async function getMethods(_req: Request, res: Response): Promise<void> {
   const methods = await prisma.paymentMethod.findMany({ where: { isActive: true }, orderBy: { sequence: 'asc' } });
   res.json({ success: true, data: methods });
 }

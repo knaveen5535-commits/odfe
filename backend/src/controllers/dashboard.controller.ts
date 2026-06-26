@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { prisma } from '../index';
 
-export async function getSummary(req: Request, res: Response): Promise<void> {
+export async function getSummary(_req: Request, res: Response): Promise<void> {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
   const tomorrow = new Date(today);
