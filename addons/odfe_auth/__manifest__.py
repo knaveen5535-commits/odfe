@@ -11,6 +11,7 @@
         'views/employee_views.xml',
         'views/login_page.xml',
         'views/landing_page.xml',
+        'views/dashboard_page.xml',
     ],
     'demo': [],
     'installable': True,

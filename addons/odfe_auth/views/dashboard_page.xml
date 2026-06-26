@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_odfe_dashboard_page" model="ir.ui.view">
+        <field name="name">ODFE Dashboard Page</field>
+        <field name="type">qweb</field>
+        <field name="arch" type="xml">
+            <t t-name="odfe_auth.dashboard_page">
+                <div class="odfe-dashboard">
+                    <header class="dashboard-header">
+                        <h1>ODFE Cafe POS Dashboard</h1>
+                        <a href="/odfe/auth/logout" class="btn btn-logout">Logout</a>
+                    </header>
+                    <nav class="dashboard-nav">
+                        <a href="/odfe/pos">POS Terminal</a>
+                        <a href="/odfe/dashboard" class="active">Dashboard</a>
+                        <a href="/odfe/orders">Orders</a>
+                        <a href="/odfe/kitchen">Kitchen Display</a>
+                        <a href="/odfe/reports">Reports</a>
+                    </nav>
+                    <div class="dashboard-stats">
+                        <div class="stat-card">
+                            <h3>Today Orders</h3>
+                            <p class="stat-value" t-esc="total_orders"/>
+                        </div>
+                        <div class="stat-card">
+                            <h3>Revenue</h3>
+                            <p class="stat-value" t-esc="'%0.2f' % total_revenue"/>
+                        </div>
+                        <div class="stat-card">
+                            <h3>Avg Order</h3>
+                            <p class="stat-value" t-esc="'%0.2f' % average_order"/>
+                        </div>
+                        <div class="stat-card">
+                            <h3>Pending</h3>
+                            <p class="stat-value" t-esc="pending_orders"/>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </field>
+    </record>
+</odoo>
