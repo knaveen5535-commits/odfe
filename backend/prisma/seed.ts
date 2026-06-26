@@ -1,156 +1,297 @@
-import { PrismaClient, RoleType } from '@prisma/client';
+import { PrismaClient, RoleType, OrderStatus, TableStatus, PaymentStatus } from '@prisma/client';
 import * as bcrypt from 'bcryptjs';
 
 const prisma = new PrismaClient();
 
 async function main() {
-  const adminPassword = await bcrypt.hash('admin123', 12);
+  console.log('Starting seed...');
 
-  const adminUser = await prisma.user.upsert({
-    where: { email: 'admin@odfe.com' },
-    update: {},
-    create: {
-      email: 'admin@odfe.com',
-      password: adminPassword,
-      firstName: 'Admin',
-      lastName: 'User',
-      role: RoleType.ADMIN,
-    },
-  });
+  // 1. Roles
+  const roles = [
+    { code: 'admin', name: 'Admin', isAdmin: true },
+    { code: 'cashier', name: 'Cashier', isCashier: true },
+    { code: 'kitchen', name: 'Kitchen Staff', isKitchen: true },
+    { code: 'waiter', name: 'Waiter', isWaiter: true },
+    { code: 'billing', name: 'Billing', isAdmin: false },
+    { code: 'order_manager', name: 'Order Manager', isCashier: true },
+  ];
 
-  const adminRole = await prisma.role.upsert({
-    where: { code: 'admin' },
-    update: {},
-    create: { name: 'Admin', code: 'admin', isAdmin: true },
-  });
+  for (const r of roles) {
+    await prisma.role.upsert({
+      where: { code: r.code },
+      update: {},
+      create: { name: r.name, code: r.code, isAdmin: r.isAdmin || false, isCashier: r.isCashier || false, isKitchen: r.isKitchen || false, isWaiter: r.isWaiter || false },
+    });
+  }
 
-  await prisma.employee.upsert({
-    where: { employeeCode: 'EMP001' },
-    update: {},
-    create: {
-      employeeCode: 'EMP001',
-      name: 'Admin User',
-      userId: adminUser.id,
-      roleId: adminRole.id,
-    },
-  });
+  // 2. Demo Accounts & Employees
+  const demoAccounts = [
+    { email: 'admin@odfe.local', pass: 'Admin@123', first: 'Admin', last: 'User', roleCode: 'admin', empCode: 'EMP-ADM', roleType: RoleType.ADMIN },
+    { email: 'cashier1@odfe.local', pass: 'Cashier@123', first: 'Cashier', last: 'One', roleCode: 'cashier', empCode: 'EMP-CSH1', roleType: RoleType.CASHIER },
+    { email: 'cashier2@odfe.local', pass: 'Cashier@123', first: 'Order', last: 'Manager', roleCode: 'order_manager', empCode: 'EMP-OM', roleType: RoleType.CASHIER },
+    { email: 'kitchen@odfe.local', pass: 'Kitchen@123', first: 'Kitchen', last: 'Staff', roleCode: 'kitchen', empCode: 'EMP-KIT', roleType: RoleType.KITCHEN_STAFF },
+    { email: 'billing@odfe.local', pass: 'Billing@123', first: 'Billing', last: 'User', roleCode: 'billing', empCode: 'EMP-BIL', roleType: RoleType.CASHIER },
+  ];
 
-  const cashRole = await prisma.role.upsert({
-    where: { code: 'cashier' },
-    update: {},
-    create: { name: 'Cashier', code: 'cashier', isCashier: true },
-  });
+  for (const acc of demoAccounts) {
+    const hash = await bcrypt.hash(acc.pass, 10);
+    const user = await prisma.user.upsert({
+      where: { email: acc.email },
+      update: { password: hash },
+      create: { email: acc.email, password: hash, firstName: acc.first, lastName: acc.last, role: acc.roleType },
+    });
+    
+    const role = await prisma.role.findUnique({ where: { code: acc.roleCode } });
+    if (role) {
+      await prisma.employee.upsert({
+        where: { employeeCode: acc.empCode },
+        update: {},
+        create: { employeeCode: acc.empCode, name: `${acc.first} ${acc.last}`, userId: user.id, roleId: role.id },
+      });
+    }
+  }
 
-  const waiterRole = await prisma.role.upsert({
-    where: { code: 'waiter' },
-    update: {},
-    create: { name: 'Waiter', code: 'waiter', isWaiter: true },
-  });
+  // 3. Categories (7)
+  const categoryNames = ['Coffee', 'Tea', 'Pizza', 'Burger', 'Dessert', 'Quick Bites', 'Cold Drinks'];
+  const categories = [];
+  for (let i = 0; i < categoryNames.length; i++) {
+    const cat = await prisma.category.upsert({
+      where: { id: `cat-${i}` },
+      update: {},
+      create: { id: `cat-${i}`, name: categoryNames[i], sequence: i * 10 },
+    });
+    categories.push(cat);
+  }
 
-  const kitchenRole = await prisma.role.upsert({
-    where: { code: 'kitchen' },
-    update: {},
-    create: { name: 'Kitchen Staff', code: 'kitchen', isKitchen: true },
-  });
-
+  // 4. UOM & Tax
   const uom = await prisma.uOM.upsert({
-    where: { id: 'default-unit' },
+    where: { id: 'uom-pc' },
     update: {},
-    create: { id: 'default-unit', name: 'Unit', code: 'pc', category: 'unit' },
-  });
-
-  const coffeeCat = await prisma.category.upsert({
-    where: { id: 'cat-coffee' },
-    update: {},
-    create: { id: 'cat-coffee', name: 'Coffee', sequence: 10 },
-  });
-
-  const foodCat = await prisma.category.upsert({
-    where: { id: 'cat-food' },
-    update: {},
-    create: { id: 'cat-food', name: 'Food', sequence: 20 },
-  });
-
-  const beverageCat = await prisma.category.upsert({
-    where: { id: 'cat-beverage' },
-    update: {},
-    create: { id: 'cat-beverage', name: 'Beverages', sequence: 30 },
+    create: { id: 'uom-pc', name: 'Piece', code: 'pc' },
   });
 
   const tax = await prisma.tax.upsert({
     where: { id: 'tax-gst5' },
     update: {},
-    create: { id: 'tax-gst5', name: 'GST 5%', rate: 5, type: 'exclusive' },
+    create: { id: 'tax-gst5', name: 'GST 5%', rate: 5 },
   });
 
-  const products = [
-    { name: 'Espresso', categoryId: 'cat-coffee', price: 3.5, kitchenCat: 'beverage' },
-    { name: 'Cappuccino', categoryId: 'cat-coffee', price: 4.5, kitchenCat: 'beverage' },
-    { name: 'Latte', categoryId: 'cat-coffee', price: 5.0, kitchenCat: 'beverage' },
-    { name: 'Club Sandwich', categoryId: 'cat-food', price: 8.0, kitchenCat: 'main' },
-    { name: 'Grilled Chicken', categoryId: 'cat-food', price: 12.0, kitchenCat: 'main' },
-    { name: 'Caesar Salad', categoryId: 'cat-food', price: 7.5, kitchenCat: 'starter' },
-    { name: 'French Fries', categoryId: 'cat-food', price: 4.0, kitchenCat: 'starter' },
-    { name: 'Chocolate Cake', categoryId: 'cat-food', price: 5.5, kitchenCat: 'dessert' },
-    { name: 'Orange Juice', categoryId: 'cat-beverage', price: 3.5, kitchenCat: 'beverage' },
-    { name: 'Iced Tea', categoryId: 'cat-beverage', price: 3.0, kitchenCat: 'beverage' },
+  // 5. Products (40)
+  const productNames = [
+    'Espresso', 'Americano', 'Latte', 'Cappuccino', 'Mocha', 'Macchiato', 'Flat White', 'Affogato', 
+    'Green Tea', 'Black Tea', 'Earl Grey', 'Chamomile', 'Iced Lemon Tea', 'Matcha Latte',
+    'Margherita Pizza', 'Pepperoni Pizza', 'BBQ Chicken Pizza', 'Veggie Supreme', 'Mushroom Truffle Pizza',
+    'Classic Cheeseburger', 'Bacon Burger', 'Veggie Burger', 'Spicy Chicken Burger', 'Double Patty Burger',
+    'Chocolate Brownie', 'Cheesecake', 'Tiramisu', 'Apple Pie', 'Ice Cream Sundae',
+    'French Fries', 'Garlic Bread', 'Onion Rings', 'Chicken Wings', 'Nachos',
+    'Cola', 'Lemonade', 'Iced Coffee', 'Mango Smoothie', 'Strawberry Shake', 'Cold Brew'
   ];
+  const products = [];
+  for (let i = 0; i < productNames.length; i++) {
+    let catIndex = 0;
+    if (i >= 8 && i < 14) catIndex = 1;
+    else if (i >= 14 && i < 19) catIndex = 2;
+    else if (i >= 19 && i < 24) catIndex = 3;
+    else if (i >= 24 && i < 29) catIndex = 4;
+    else if (i >= 29 && i < 34) catIndex = 5;
+    else if (i >= 34) catIndex = 6;
 
-  for (const p of products) {
-    await prisma.product.upsert({
-      where: { id: `prod-${p.name.toLowerCase().replace(/\s+/g, '-')}` },
+    const prod = await prisma.product.upsert({
+      where: { id: `prod-${i}` },
       update: {},
       create: {
-        id: `prod-${p.name.toLowerCase().replace(/\s+/g, '-')}`,
-        name: p.name,
-        categoryId: p.categoryId,
+        id: `prod-${i}`,
+        name: productNames[i],
+        categoryId: categories[catIndex].id,
         uomId: uom.id,
-        salePrice: p.price,
-        costPrice: p.price * 0.35,
+        salePrice: 5 + (i % 15),
+        costPrice: 2 + (i % 5),
         taxId: tax.id,
-        kitchenCategory: p.kitchenCat,
+        isAvailable: true
+      },
+    });
+    products.push(prod);
+  }
+
+  // 6. Floors (4)
+  const floorNames = ['Ground Floor', 'First Floor', 'Outdoor', 'VIP Lounge'];
+  const floors = [];
+  for (let i = 0; i < floorNames.length; i++) {
+    const f = await prisma.floor.upsert({
+      where: { id: `floor-${i}` },
+      update: {},
+      create: { id: `floor-${i}`, name: floorNames[i], sequence: i },
+    });
+    floors.push(f);
+  }
+
+  // 7. Tables (30)
+  const tables = [];
+  let tableCounter = 1;
+  for (let f = 0; f < floors.length; f++) {
+    for (let t = 0; t < 7 + (f % 2); t++) { // ~7-8 tables per floor = 30 total
+      const table = await prisma.table.upsert({
+        where: { id: `table-${tableCounter}` },
+        update: {},
+        create: {
+          id: `table-${tableCounter}`,
+          name: `T${tableCounter}`,
+          floorId: floors[f].id,
+          capacity: (tableCounter % 4) * 2 + 2,
+          posX: (t % 4) * 150 + 50,
+          posY: Math.floor(t / 4) * 150 + 50,
+        },
+      });
+      tables.push(table);
+      tableCounter++;
+    }
+  }
+
+  // 8. Customers (100)
+  const customers = [];
+  for (let i = 1; i <= 100; i++) {
+    const cust = await prisma.customer.upsert({
+      where: { id: `cust-${i}` },
+      update: {},
+      create: {
+        id: `cust-${i}`,
+        name: `Customer ${i}`,
+        email: `customer${i}@example.com`,
+        phone: `+123456789${i.toString().padStart(2, '0')}`,
+        loyaltyPoints: i * 10,
+        totalOrders: i % 5,
+      },
+    });
+    customers.push(cust);
+  }
+
+  // 9. Payment Methods
+  const paymentMethods = [
+    { name: 'Cash', code: 'CASH', type: 'cash' },
+    { name: 'Card', code: 'CARD', type: 'card' },
+    { name: 'UPI', code: 'UPI', type: 'upi' },
+    { name: 'Wallet', code: 'WALLET', type: 'wallet' },
+    { name: 'Gift Card', code: 'GIFT', type: 'gift' },
+  ];
+  for (const pm of paymentMethods) {
+    await prisma.paymentMethod.upsert({
+      where: { code: pm.code },
+      update: {},
+      create: { name: pm.name, code: pm.code, methodType: pm.type },
+    });
+  }
+  const allPaymentMethods = await prisma.paymentMethod.findMany();
+
+  // 10. Coupons & Promotions
+  const coupons = [
+    { code: 'WELCOME20', val: 20 },
+    { code: 'SAVE100', val: 100 },
+    { code: 'FIRSTORDER', val: 15 },
+    { code: 'SUMMER25', val: 25 },
+  ];
+  for (const c of coupons) {
+    await prisma.coupon.upsert({
+      where: { code: c.code },
+      update: {},
+      create: {
+        code: c.code,
+        discountType: c.val > 50 ? 'fixed' : 'percentage',
+        discountValue: c.val,
+        validFrom: new Date(),
+        validUntil: new Date(new Date().setFullYear(new Date().getFullYear() + 1)),
       },
     });
   }
 
-  const floor = await prisma.floor.upsert({
-    where: { id: 'floor-main' },
-    update: {},
-    create: { id: 'floor-main', name: 'Main Floor', code: 'MAIN' },
+  await prisma.promotion.createMany({
+    skipDuplicates: true,
+    data: [
+      { name: 'Buy 2 Coffee -> 20% Off', promoType: 'BOGO', discountPercent: 20 },
+      { name: 'Spend 500 -> 50 Discount', promoType: 'THRESHOLD', discountPercent: 0 },
+      { name: 'Burger + Fries Combo -> 15% Off', promoType: 'COMBO', discountPercent: 15 },
+      { name: 'Happy Hour -> 10% Off', promoType: 'TIME_BASED', discountPercent: 10 },
+    ]
   });
 
-  const tables = [
-    { id: 'table-1', name: 'Table 1', x: 50, y: 100, cap: 2 },
-    { id: 'table-2', name: 'Table 2', x: 250, y: 100, cap: 4 },
-    { id: 'table-3', name: 'Table 3', x: 450, y: 100, cap: 4 },
-    { id: 'table-4', name: 'Table 4', x: 150, y: 300, cap: 6 },
-    { id: 'table-5', name: 'Table 5', x: 350, y: 300, cap: 8 },
-  ];
+  // 11. Orders (50) & Kitchen Tickets (20) & Payments
+  const cashierEmp = await prisma.employee.findUnique({ where: { employeeCode: 'EMP-CSH1' } });
+  
+  if (cashierEmp) {
+    for (let i = 1; i <= 50; i++) {
+      const isPaid = i <= 40; // 40 paid, 10 pending/draft
+      const itemCount = (i % 5) + 1;
+      const orderLinesData = [];
+      let total = 0;
+      
+      for(let j = 0; j < itemCount; j++) {
+        const prod = products[(i + j) % products.length];
+        orderLinesData.push({
+          productId: prod.id,
+          qty: 1,
+          priceUnit: prod.salePrice,
+          subtotal: prod.salePrice
+        });
+        total += prod.salePrice;
+      }
 
-  for (const t of tables) {
-    await prisma.table.upsert({
-      where: { id: t.id },
-      update: {},
-      create: { id: t.id, name: t.name, floorId: floor.id, posX: t.x, posY: t.y, capacity: t.cap },
-    });
+      const orderDate = new Date();
+      orderDate.setDate(orderDate.getDate() - (i % 7)); // Spread over last 7 days
+
+      const order = await prisma.order.upsert({
+        where: { orderRef: `ORD-DEMO-${i}` },
+        update: {},
+        create: {
+          orderRef: `ORD-DEMO-${i}`,
+          employeeId: cashierEmp.id,
+          customerId: customers[i % customers.length].id,
+          tableId: tables[i % tables.length].id,
+          status: isPaid ? OrderStatus.PAID : OrderStatus.DRAFT,
+          total: total,
+          itemCount: itemCount,
+          orderDate: orderDate,
+          orderLines: {
+            create: orderLinesData
+          }
+        }
+      });
+
+      if (isPaid) {
+        await prisma.payment.upsert({
+          where: { paymentRef: `PAY-DEMO-${i}` },
+          update: {},
+          create: {
+            paymentRef: `PAY-DEMO-${i}`,
+            orderId: order.id,
+            methodId: allPaymentMethods[i % allPaymentMethods.length].id,
+            amount: total,
+            status: PaymentStatus.COMPLETED,
+            paymentDate: orderDate,
+          }
+        });
+      }
+
+      // 20 Kitchen Tickets
+      if (i > 30) {
+        await prisma.kitchenOrder.create({
+          data: {
+            orderId: order.id,
+            displayName: `K-${order.orderRef}`,
+            tableName: tables[i % tables.length].name,
+            status: i % 2 === 0 ? 'new' : 'preparing',
+            items: {
+              create: orderLinesData.map(ol => ({
+                productId: ol.productId,
+                qty: ol.qty,
+                status: 'pending'
+              }))
+            }
+          }
+        });
+      }
+    }
   }
 
-  const methods = [
-    { name: 'Cash', code: 'CASH', type: 'cash' },
-    { name: 'Card', code: 'CARD', type: 'card' },
-    { name: 'UPI', code: 'UPI', type: 'upi' },
-    { name: 'QR Code', code: 'QR', type: 'qr' },
-  ];
-
-  for (const m of methods) {
-    await prisma.paymentMethod.upsert({
-      where: { code: m.code },
-      update: {},
-      create: { name: m.name, code: m.code, methodType: m.type },
-    });
-  }
-
-  console.log('Seed completed successfully');
+  console.log('Seed completed!');
 }
 
 main()

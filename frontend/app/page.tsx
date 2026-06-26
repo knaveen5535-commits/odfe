@@ -1,8 +1,27 @@
 'use client';
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import styles from '../styles/pages/Landing.module.scss';
 
 export default function LandingPage() {
+  const router = useRouter();
+
+  useEffect(() => {
+    const userStr = localStorage.getItem('user');
+    if (userStr) {
+      try {
+        const user = JSON.parse(userStr);
+        if (user.role === 'ADMIN') router.push('/dashboard');
+        else if (user.role === 'CASHIER') router.push('/pos');
+        else if (user.role === 'KITCHEN_STAFF') router.push('/kitchen');
+        else router.push('/payments'); 
+      } catch (e) {
+        console.error(e);
+      }
+    }
+  }, [router]);
+
   return (
     <div className={styles.landingPage}>
       {/* NAVBAR */}
