@@ -28,6 +28,8 @@ const cashierNavItems = [
   { href: '/customers', label: 'Customers', icon: Users },
   { href: '/payments', label: 'Payments', icon: DollarSign },
   { href: '/split-bill', label: 'Split Bill', icon: SplitSquareVertical },
+  { href: '/receipt', label: 'Receipts', icon: Receipt },
+  { href: '/payment-history', label: 'Billing History', icon: FileText },
 ];
 
 const kitchenNavItems = [
@@ -38,14 +40,7 @@ const kitchenNavItems = [
   { href: '/kitchen?status=completed', label: 'Completed', icon: ClipboardList },
 ];
 
-const billingNavItems = [
-  { href: '/payments', label: 'Payments', icon: DollarSign },
-  { href: '/payments?method=cash', label: 'Cash', icon: Banknote },
-  { href: '/payments?method=card', label: 'Card', icon: CreditCard },
-  { href: '/payments?method=upi', label: 'UPI', icon: Smartphone },
-  { href: '/receipt', label: 'Receipt', icon: Receipt },
-  { href: '/payment-history', label: 'History', icon: FileText },
-];
+
 
 export default function Sidebar() {
   const pathname = usePathname();
@@ -63,9 +58,6 @@ export default function Sidebar() {
     case 'KITCHEN':
       navItems = kitchenNavItems;
       break;
-    case 'BILLING':
-      navItems = billingNavItems;
-      break;
     default:
       navItems = [];
   }
@@ -73,7 +65,7 @@ export default function Sidebar() {
   return (
     <aside className="w-64 bg-white border-r border-border flex flex-col h-screen sticky top-0">
       <div className="p-5 border-b border-border">
-        <Link href={effectiveRole === 'ADMIN' ? '/dashboard' : effectiveRole === 'CASHIER' ? '/pos' : effectiveRole === 'KITCHEN' ? '/kitchen' : '/payments'} className="flex items-center gap-2">
+        <Link href={effectiveRole === 'ADMIN' ? '/dashboard' : effectiveRole === 'CASHIER' ? '/pos' : '/kitchen'} className="flex items-center gap-2">
           <Coffee size={24} className="text-primary" />
           <span className="text-lg font-bold text-[#2B1D15]">ODFE</span>
         </Link>

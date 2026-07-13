@@ -9,7 +9,6 @@ const DEMO_ACCOUNTS = [
   { name: 'Administrator', email: 'admin@odfe.local', pass: 'Admin@123', role: 'ADMIN', dept: 'Management' },
   { name: 'Cashier', email: 'cashier1@odfe.local', pass: 'Cashier@123', role: 'CASHIER', dept: 'Cashier' },
   { name: 'Kitchen', email: 'kitchen@odfe.local', pass: 'Kitchen@123', role: 'KITCHEN', dept: 'Kitchen' },
-  { name: 'Billing', email: 'billing@odfe.local', pass: 'Billing@123', role: 'BILLING', dept: 'Billing' },
 ];
 
 export default function LoginPage() {

@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { prisma } from '../index';
-import { NotFoundError } from '../utils/errors';
+import { NotFoundError, UnauthorizedError } from '../utils/errors';
 
 export async function getAll(req: Request, res: Response): Promise<void> {
   const { status, sessionId, page = '1', limit = '20' } = req.query;
@@ -35,10 +35,19 @@ export async function getById(req: Request, res: Response): Promise<void> {
 }
 
 export async function create(req: Request, res: Response): Promise<void> {
-  const { items, ...orderData } = req.body;
+  const { items, customerId, tableId, orderType, note, sessionId } = req.body;
+
+  const employee = await prisma.employee.findUnique({ where: { userId: req.user!.userId } });
+  if (!employee) throw new UnauthorizedError('No employee profile found for this user');
+
   const order = await prisma.order.create({
     data: {
-      ...orderData,
+      employeeId: employee.id,
+      customerId: customerId || null,
+      tableId: tableId || null,
+      orderType: orderType || 'dine_in',
+      note: note || null,
+      sessionId: sessionId || null,
       orderRef: `ORD-${Date.now()}`,
       orderLines: {
         create: items.map((item: { productId: string; qty: number; priceUnit: number; discount?: number }) => ({

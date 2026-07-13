@@ -10,7 +10,6 @@ const roleRedirects: Record<string, string> = {
   CASHIER: '/pos',
   KITCHEN: '/kitchen',
   KITCHEN_STAFF: '/kitchen',
-  BILLING: '/payments',
   ORDER_MANAGER: '/orders',
   order_manager: '/orders',
 };
@@ -42,9 +41,8 @@ function isValidToken(token: string): boolean {
 }
 
 const adminAllowed = ['/dashboard', '/products', '/categories', '/employees', '/customers', '/orders', '/reports', '/settings', '/floors', '/tables', '/bookings', '/coupons', '/promotions', '/inventory', '/analytics', '/profile', '/payment-methods'];
-const cashierAllowed = ['/pos', '/orders', '/customers', '/tables', '/floor-plan', '/split-bill', '/coupons', '/checkout', '/receipt', '/payments'];
+const cashierAllowed = ['/pos', '/orders', '/customers', '/tables', '/floor-plan', '/split-bill', '/coupons', '/checkout', '/receipt', '/payments', '/payment-history'];
 const kitchenAllowed = ['/kitchen'];
-const billingAllowed = ['/payments', '/split-payment', '/receipt', '/payment-history', '/customer-display'];
 
 function isRouteAllowed(pathname: string, allowedPrefixes: string[]): boolean {
   return allowedPrefixes.some(p => pathname === p || pathname.startsWith(p + '/'));
@@ -97,11 +95,6 @@ export function middleware(request: NextRequest) {
       break;
     case 'KITCHEN':
       if (!isRouteAllowed(pathname, kitchenAllowed)) {
-        return NextResponse.rewrite(new URL('/forbidden', request.url));
-      }
-      break;
-    case 'BILLING':
-      if (!isRouteAllowed(pathname, billingAllowed)) {
         return NextResponse.rewrite(new URL('/forbidden', request.url));
       }
       break;

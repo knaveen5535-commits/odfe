@@ -24,7 +24,6 @@ const roleDepartmentMap: Record<string, string> = {
   CASHIER: 'Cashier',
   KITCHEN_STAFF: 'Kitchen',
   KITCHEN: 'Kitchen',
-  BILLING: 'Billing',
 };
 
 export function getEffectiveRole(role: string, department: string): string {
@@ -32,9 +31,7 @@ export function getEffectiveRole(role: string, department: string): string {
   const dept = department?.toLowerCase() || '';
   if (dept === 'cashier') return 'CASHIER';
   if (dept === 'kitchen') return 'KITCHEN';
-  if (dept === 'billing') return 'BILLING';
   if (role === 'KITCHEN_STAFF' || role === 'KITCHEN') return 'KITCHEN';
-  if (role === 'BILLING') return 'BILLING';
   if (role === 'CASHIER') return 'CASHIER';
   return role;
 }
@@ -45,7 +42,6 @@ export function getRedirectPath(role: string, department: string): string {
     case 'ADMIN': return '/dashboard';
     case 'CASHIER': return '/pos';
     case 'KITCHEN': return '/kitchen';
-    case 'BILLING': return '/payments';
     default: return '/dashboard';
   }
 }
@@ -105,7 +101,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     { email: 'admin@odfe.local', password: 'Admin@123', name: 'Administrator', role: 'ADMIN', department: 'Management' },
     { email: 'cashier1@odfe.local', password: 'Cashier@123', name: 'Cashier', role: 'CASHIER', department: 'Cashier' },
     { email: 'kitchen@odfe.local', password: 'Kitchen@123', name: 'Kitchen', role: 'KITCHEN', department: 'Kitchen' },
-    { email: 'billing@odfe.local', password: 'Billing@123', name: 'Billing', role: 'BILLING', department: 'Billing' },
   ];
 
   const login = async (email: string, password: string): Promise<{ success: boolean; error?: string }> => {
