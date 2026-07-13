@@ -26,7 +26,8 @@ async function main() {
 
   // 2. Demo Accounts & Employees
   const demoAccounts = [
-    { email: 'admin@odfe.local', pass: 'Admin@123', first: 'Admin', last: 'User', roleCode: 'admin', empCode: 'EMP-ADM', roleType: RoleType.ADMIN },
+    { email: 'admin@odfe.local', pass: 'Admin@123', first: 'Owner', last: 'User', roleCode: 'admin', empCode: 'EMP-ADM', roleType: RoleType.ADMIN },
+    { email: 'sysadmin@odfe.local', pass: 'Sysadmin@123', first: 'System', last: 'Admin', roleCode: 'admin', empCode: 'EMP-SYS', roleType: RoleType.ADMIN },
     { email: 'cashier1@odfe.local', pass: 'Cashier@123', first: 'Cashier', last: 'One', roleCode: 'cashier', empCode: 'EMP-CSH1', roleType: RoleType.CASHIER },
     { email: 'cashier2@odfe.local', pass: 'Cashier@123', first: 'Order', last: 'Manager', roleCode: 'order_manager', empCode: 'EMP-OM', roleType: RoleType.CASHIER },
     { email: 'kitchen@odfe.local', pass: 'Kitchen@123', first: 'Kitchen', last: 'Staff', roleCode: 'kitchen', empCode: 'EMP-KIT', roleType: RoleType.KITCHEN_STAFF },

@@ -6,7 +6,8 @@ import { Mail, Lock, Eye, EyeOff, Loader2, Coffee } from 'lucide-react';
 import { useAuth, getRedirectPath } from '@/context/AuthContext';
 
 const DEMO_ACCOUNTS = [
-  { name: 'Administrator', email: 'admin@odfe.local', pass: 'Admin@123', role: 'ADMIN', dept: 'Management' },
+  { name: 'Owner', email: 'admin@odfe.local', pass: 'Admin@123', role: 'ADMIN', dept: 'Management' },
+  { name: 'Administrator', email: 'sysadmin@odfe.local', pass: 'Sysadmin@123', role: 'ADMIN', dept: 'System' },
   { name: 'Cashier', email: 'cashier1@odfe.local', pass: 'Cashier@123', role: 'CASHIER', dept: 'Cashier' },
   { name: 'Kitchen', email: 'kitchen@odfe.local', pass: 'Kitchen@123', role: 'KITCHEN', dept: 'Kitchen' },
 ];

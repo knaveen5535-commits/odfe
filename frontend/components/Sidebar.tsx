@@ -10,8 +10,8 @@ import {
 } from 'lucide-react';
 import clsx from 'clsx';
 
-const adminNavItems = [
-  { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
+const ownerNavItems = [
+  { href: '/dashboard', label: 'Owner Dashboard', icon: LayoutDashboard },
   { href: '/analytics', label: 'Analytics', icon: BarChart3 },
   { href: '/products', label: 'Products', icon: Package },
   { href: '/categories', label: 'Categories', icon: ListTree },
@@ -19,6 +19,13 @@ const adminNavItems = [
   { href: '/customers', label: 'Customers', icon: ShoppingCart },
   { href: '/reports', label: 'Reports', icon: FileText },
   { href: '/settings', label: 'Settings', icon: Settings },
+];
+
+const systemAdminNavItems = [
+  { href: '/system/dashboard', label: 'System Admin', icon: LayoutDashboard },
+  { href: '/system/tenants', label: 'Tenants/Branches', icon: Settings },
+  { href: '/system/users', label: 'All Users', icon: Users },
+  { href: '/system/settings', label: 'Global Settings', icon: Settings },
 ];
 
 const cashierNavItems = [
@@ -49,8 +56,11 @@ export default function Sidebar() {
   let navItems: { href: string; label: string; icon: LucideIcon }[] = [];
 
   switch (effectiveRole) {
-    case 'ADMIN':
-      navItems = adminNavItems;
+    case 'OWNER':
+      navItems = ownerNavItems;
+      break;
+    case 'SYSTEM_ADMIN':
+      navItems = systemAdminNavItems;
       break;
     case 'CASHIER':
       navItems = cashierNavItems;
@@ -65,7 +75,7 @@ export default function Sidebar() {
   return (
     <aside className="w-64 bg-white border-r border-border flex flex-col h-screen sticky top-0">
       <div className="p-5 border-b border-border">
-        <Link href={effectiveRole === 'ADMIN' ? '/dashboard' : effectiveRole === 'CASHIER' ? '/pos' : '/kitchen'} className="flex items-center gap-2">
+        <Link href={effectiveRole === 'OWNER' ? '/dashboard' : effectiveRole === 'SYSTEM_ADMIN' ? '/system/dashboard' : effectiveRole === 'CASHIER' ? '/pos' : '/kitchen'} className="flex items-center gap-2">
           <Coffee size={24} className="text-primary" />
           <span className="text-lg font-bold text-[#2B1D15]">ODFE</span>
         </Link>

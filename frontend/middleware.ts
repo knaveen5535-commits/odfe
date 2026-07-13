@@ -6,7 +6,8 @@ const publicRoutes = ['/login', '/signup', '/forgot-password', '/reset-password'
 const publicRoutePrefixes = publicRoutes;
 
 const roleRedirects: Record<string, string> = {
-  ADMIN: '/dashboard',
+  OWNER: '/dashboard',
+  SYSTEM_ADMIN: '/system/dashboard',
   CASHIER: '/pos',
   KITCHEN: '/kitchen',
   KITCHEN_STAFF: '/kitchen',
@@ -40,7 +41,8 @@ function isValidToken(token: string): boolean {
   return true;
 }
 
-const adminAllowed = ['/dashboard', '/products', '/categories', '/employees', '/customers', '/orders', '/reports', '/settings', '/floors', '/tables', '/bookings', '/coupons', '/promotions', '/inventory', '/analytics', '/profile', '/payment-methods'];
+const ownerAllowed = ['/dashboard', '/products', '/categories', '/employees', '/customers', '/orders', '/reports', '/settings', '/floors', '/tables', '/bookings', '/coupons', '/promotions', '/inventory', '/analytics', '/profile', '/payment-methods'];
+const systemAdminAllowed = ['/system/dashboard', '/system/users', '/system/settings', '/system/tenants', '/system/audit'];
 const cashierAllowed = ['/pos', '/orders', '/customers', '/tables', '/floor-plan', '/split-bill', '/coupons', '/checkout', '/receipt', '/payments', '/payment-history'];
 const kitchenAllowed = ['/kitchen'];
 
@@ -83,8 +85,13 @@ export function middleware(request: NextRequest) {
 
   // 3. Role-based route access — rewrite to forbidden for unauthorized roles
   switch (role) {
-    case 'ADMIN':
-      if (!isRouteAllowed(pathname, adminAllowed)) {
+    case 'OWNER':
+      if (!isRouteAllowed(pathname, ownerAllowed)) {
+        return NextResponse.rewrite(new URL('/forbidden', request.url));
+      }
+      break;
+    case 'SYSTEM_ADMIN':
+      if (!isRouteAllowed(pathname, systemAdminAllowed)) {
         return NextResponse.rewrite(new URL('/forbidden', request.url));
       }
       break;
