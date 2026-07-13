@@ -51,15 +51,21 @@ export default function LoginPage() {
     setError('');
     const result = await login(email, password);
     if (result.success) {
-      const userStr = localStorage.getItem('user');
-      if (userStr) {
-        const user = JSON.parse(userStr);
-        router.push(getRedirectPath(user.role, user.department));
+      try {
+        const userStr = localStorage.getItem('user');
+        if (userStr) {
+          const user = JSON.parse(userStr);
+          router.push(getRedirectPath(user.role, user.department));
+          return;
+        }
+      } catch {
+        // fall through to error
       }
+      setError('Failed to retrieve user session.');
     } else {
       setError(result.error || 'Invalid email or password.');
-      setIsLoading(false);
     }
+    setIsLoading(false);
   };
 
   return (

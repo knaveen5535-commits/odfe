@@ -116,6 +116,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         body: JSON.stringify({ email, password }),
         credentials: 'include',
       });
+      if (res.status >= 500) {
+        throw new Error('Server error');
+      }
       const data = await res.json();
       if (data.success) {
         const apiUser = data.data.user;
@@ -131,7 +134,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       }
       return { success: false, error: data.error || data.message || 'Invalid email or password' };
     } catch {
-      // Fallback to static demo accounts when backend is unreachable
+      // Fallback to static demo accounts when backend is unreachable or has server error
       const account = DEMO_ACCOUNTS.find(a => a.email === email && a.password === password);
       if (account) {
         const userData: User = {
@@ -141,7 +144,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           role: account.role,
           department: account.department,
         };
-        setSession('dev-jwt-token.eyJyb2xlIjoiQURNSU4ifQ.signature', userData);
+        const rolePayload = btoa(JSON.stringify({ role: account.role }));
+        setSession(`dev-jwt-token.${rolePayload}.signature`, userData);
         return { success: true };
       }
       return { success: false, error: 'Invalid email or password' };

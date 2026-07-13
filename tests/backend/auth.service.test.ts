@@ -1,4 +1,5 @@
-import { describe, it, expect, jest } from '@jest/globals';
+import { hashPassword, comparePassword } from '../../backend/src/utils/password';
+import { generateAccessToken, verifyToken } from '../../backend/src/utils/jwt';
 
 describe('AuthService', () => {
   it('should hash password correctly', async () => {

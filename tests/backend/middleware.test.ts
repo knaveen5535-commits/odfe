@@ -1,4 +1,4 @@
-import { describe, it, expect } from '@jest/globals';
+import { authenticate, authorize } from '../../backend/src/middleware/auth.middleware';
 
 describe('Middleware', () => {
   it('should reject request without auth header', () => {
