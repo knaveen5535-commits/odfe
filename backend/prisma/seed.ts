@@ -26,12 +26,9 @@ async function main() {
 
   // 2. Demo Accounts & Employees
   const demoAccounts = [
-    { email: 'admin@odfe.local', pass: 'Admin@123', first: 'Owner', last: 'User', roleCode: 'admin', empCode: 'EMP-ADM', roleType: RoleType.ADMIN },
-    { email: 'sysadmin@odfe.local', pass: 'Sysadmin@123', first: 'System', last: 'Admin', roleCode: 'admin', empCode: 'EMP-SYS', roleType: RoleType.ADMIN },
-    { email: 'cashier1@odfe.local', pass: 'Cashier@123', first: 'Cashier', last: 'One', roleCode: 'cashier', empCode: 'EMP-CSH1', roleType: RoleType.CASHIER },
-    { email: 'cashier2@odfe.local', pass: 'Cashier@123', first: 'Order', last: 'Manager', roleCode: 'order_manager', empCode: 'EMP-OM', roleType: RoleType.CASHIER },
+    { email: 'admin@odfe.local', pass: 'Admin@123', first: 'Admin', last: 'User', roleCode: 'admin', empCode: 'EMP-ADM', roleType: RoleType.ADMIN },
+    { email: 'pos@odfe.local', pass: 'Pos@123', first: 'Employee', last: 'POS', roleCode: 'cashier', empCode: 'EMP-POS', roleType: RoleType.CASHIER },
     { email: 'kitchen@odfe.local', pass: 'Kitchen@123', first: 'Kitchen', last: 'Staff', roleCode: 'kitchen', empCode: 'EMP-KIT', roleType: RoleType.KITCHEN_STAFF },
-    { email: 'billing@odfe.local', pass: 'Billing@123', first: 'Billing', last: 'User', roleCode: 'billing', empCode: 'EMP-BIL', roleType: RoleType.BILLING },
   ];
 
   for (const acc of demoAccounts) {
@@ -215,7 +212,7 @@ async function main() {
   });
 
   // 11. Orders (50) & Kitchen Tickets (20) & Payments
-  const cashierEmp = await prisma.employee.findUnique({ where: { employeeCode: 'EMP-CSH1' } });
+  const cashierEmp = await prisma.employee.findUnique({ where: { employeeCode: 'EMP-POS' } });
   
   if (cashierEmp) {
     for (let i = 1; i <= 50; i++) {

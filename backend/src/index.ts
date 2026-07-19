@@ -22,6 +22,9 @@ import tableRoutes from './routes/table.routes';
 import floorRoutes from './routes/floor.routes';
 import kitchenRoutes from './routes/kitchen.routes';
 import settingRoutes from './routes/settings.routes';
+import reportRoutes from './routes/report.routes';
+import sessionRoutes from './routes/session.routes';
+import selfOrderRoutes from './routes/self-order.routes';
 
 export const prisma = new PrismaClient();
 
@@ -57,6 +60,9 @@ app.use('/api/tables', tableRoutes);
 app.use('/api/floors', floorRoutes);
 app.use('/api/kitchen', kitchenRoutes);
 app.use('/api/settings', settingRoutes);
+app.use('/api/reports', reportRoutes);
+app.use('/api/sessions', sessionRoutes);
+app.use('/api/self-order', selfOrderRoutes);
 
 app.get('/api/health', (_req, res) => {
   res.json({ success: true, data: { status: 'ok', timestamp: new Date().toISOString() } });

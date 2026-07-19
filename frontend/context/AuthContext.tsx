@@ -102,10 +102,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }
 
   const DEMO_ACCOUNTS = [
-    { email: 'admin@odfe.local', password: 'Admin@123', name: 'Owner', role: 'ADMIN', department: 'Management' },
-    { email: 'sysadmin@odfe.local', password: 'Sysadmin@123', name: 'Administrator', role: 'ADMIN', department: 'System' },
-    { email: 'cashier1@odfe.local', password: 'Cashier@123', name: 'Cashier', role: 'CASHIER', department: 'Cashier' },
-    { email: 'kitchen@odfe.local', password: 'Kitchen@123', name: 'Kitchen', role: 'KITCHEN', department: 'Kitchen' },
+    { email: 'admin@odfe.local', password: 'Admin@123', name: 'Admin', role: 'ADMIN', department: 'Management' },
+    { email: 'pos@odfe.local', password: 'Pos@123', name: 'Employee POS', role: 'CASHIER', department: 'Cashier' },
+    { email: 'kitchen@odfe.local', password: 'Kitchen@123', name: 'Kitchen Dashboard', role: 'KITCHEN_STAFF', department: 'Kitchen' },
   ];
 
   const login = async (email: string, password: string): Promise<{ success: boolean; error?: string }> => {

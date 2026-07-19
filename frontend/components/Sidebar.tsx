@@ -6,19 +6,28 @@ import {
   LayoutDashboard, BarChart3, Package, ListTree, Users,
   ShoppingCart, FileText, Settings, User, LogOut, Coffee, ChefHat,
   ClipboardList, SplitSquareVertical, CreditCard, DollarSign,
-  Receipt, Clock, Banknote, Smartphone, Table2, Map, LucideIcon,
+  Receipt, Clock, Banknote, Smartphone, Table2, Map, QrCode,
+  CheckCircle, FileClock, Ticket, Megaphone, UserCircle,
+  LucideIcon,
 } from 'lucide-react';
 import clsx from 'clsx';
 
 const ownerNavItems = [
-  { href: '/dashboard', label: 'Owner Dashboard', icon: LayoutDashboard },
-  { href: '/analytics', label: 'Analytics', icon: BarChart3 },
+  { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
   { href: '/products', label: 'Products', icon: Package },
-  { href: '/categories', label: 'Categories', icon: ListTree },
-  { href: '/employees', label: 'Employees', icon: Users },
-  { href: '/customers', label: 'Customers', icon: ShoppingCart },
+  { href: '/orders', label: 'Orders', icon: ClipboardList },
+  { href: '/tables', label: 'Tables', icon: Table2 },
+  { href: '/customers', label: 'Customers', icon: Users },
+  { href: '/employees', label: 'Employees', icon: UserCircle },
+  { href: '/payments', label: 'Payments', icon: DollarSign },
+  { href: '/coupons', label: 'Coupons', icon: Ticket },
+  { href: '/promotions', label: 'Promotions', icon: Megaphone },
+  { href: '/kitchen', label: 'Kitchen Display', icon: ChefHat },
+  { href: '/sessions', label: 'POS Sessions', icon: Clock },
   { href: '/reports', label: 'Reports', icon: FileText },
+  { href: '/self-order', label: 'Self Ordering', icon: Smartphone },
   { href: '/settings', label: 'Settings', icon: Settings },
+  { href: '/profile', label: 'Profile', icon: User },
 ];
 
 const systemAdminNavItems = [
@@ -29,22 +38,21 @@ const systemAdminNavItems = [
 ];
 
 const cashierNavItems = [
-  { href: '/pos', label: 'POS', icon: CreditCard },
-  { href: '/tables', label: 'Tables', icon: Table2 },
-  { href: '/orders', label: 'Orders', icon: ClipboardList },
-  { href: '/customers', label: 'Customers', icon: Users },
-  { href: '/payments', label: 'Payments', icon: DollarSign },
-  { href: '/split-bill', label: 'Split Bill', icon: SplitSquareVertical },
-  { href: '/receipt', label: 'Receipts', icon: Receipt },
-  { href: '/payment-history', label: 'Billing History', icon: FileText },
+  { href: '/pos', label: 'Dashboard', icon: LayoutDashboard },
+  { href: '/pos/floor', label: 'Floor View', icon: Map },
+  { href: '/pos/order', label: 'Order Screen', icon: ShoppingCart },
+  { href: '/pos/orders', label: 'Orders', icon: ClipboardList },
+  { href: '/pos/customers', label: 'Customers', icon: Users },
+  { href: '/pos/payments', label: 'Payments', icon: DollarSign },
+  { href: '/pos/session', label: 'Session', icon: Clock },
+  { href: '/profile', label: 'Profile', icon: User },
 ];
 
 const kitchenNavItems = [
-  { href: '/kitchen', label: 'Kitchen Display', icon: ChefHat },
   { href: '/kitchen?status=to-cook', label: 'To Cook', icon: Clock },
   { href: '/kitchen?status=preparing', label: 'Preparing', icon: ChefHat },
-  { href: '/kitchen?status=ready', label: 'Ready', icon: Package },
-  { href: '/kitchen?status=completed', label: 'Completed', icon: ClipboardList },
+  { href: '/kitchen?status=completed', label: 'Completed', icon: CheckCircle },
+  { href: '/kitchen/history', label: 'History', icon: FileClock },
 ];
 
 
