@@ -40,6 +40,7 @@ exports.refresh = refresh;
 exports.requestPasswordReset = requestPasswordReset;
 exports.resetPassword = resetPassword;
 exports.getProfile = getProfile;
+const client_1 = require("@prisma/client");
 const zod_1 = require("zod");
 const authService = __importStar(require("../services/auth.service"));
 const index_1 = require("../index");
@@ -49,7 +50,7 @@ const registerSchema = zod_1.z.object({
     password: zod_1.z.string().min(8),
     firstName: zod_1.z.string().optional(),
     lastName: zod_1.z.string().optional(),
-    role: zod_1.z.string().optional(),
+    role: zod_1.z.nativeEnum(client_1.RoleType).optional(),
 });
 const loginSchema = zod_1.z.object({
     email: zod_1.z.string().email(),
@@ -57,7 +58,7 @@ const loginSchema = zod_1.z.object({
 });
 async function register(req, res) {
     const data = registerSchema.parse(req.body);
-    const result = await authService.register({ ...data, role: data.role || 'ADMIN' });
+    const result = await authService.register({ ...data, role: data.role || client_1.RoleType.ADMIN });
     res.cookie('refreshToken', result.refreshToken, {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
@@ -108,6 +109,7 @@ async function resetPassword(req, res) {
 const roleDepartmentMap = {
     ADMIN: 'Management',
     CASHIER: 'Cashier',
+    WAITER: 'Floor',
     KITCHEN_STAFF: 'Kitchen',
     BILLING: 'Billing',
 };

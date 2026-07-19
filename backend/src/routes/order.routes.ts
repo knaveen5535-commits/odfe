@@ -5,7 +5,7 @@ import * as orderController from '../controllers/order.controller';
 const router = Router();
 
 router.use(authenticate);
-router.use(authorize('ADMIN', 'CASHIER', 'KITCHEN'));
+router.use(authorize('ADMIN', 'CASHIER', 'KITCHEN_STAFF'));
 router.get('/', orderController.getAll);
 router.get('/:id', orderController.getById);
 router.post('/', orderController.create);

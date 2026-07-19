@@ -11,7 +11,7 @@ export default function SystemAdminDashboard() {
         <div className="p-8 pb-4">
           <div className="flex justify-between items-center mb-8">
             <div className="flex items-center gap-4">
-              <div className="bg-gradient-to-br from-gray-800 to-black p-3 rounded-2xl shadow-lg shadow-black/30 text-white">
+              <div className="bg-gradient-to-br from-gray-800 to-black p-3 rounded-2xl shadow-sm-lg shadow-sm-black/30 text-white">
                 <ShieldAlert size={32} />
               </div>
               <div>
@@ -90,7 +90,7 @@ export default function SystemAdminDashboard() {
                       <h4 className="font-bold text-[#2C1810]">{log.action}</h4>
                       <p className="text-sm font-medium text-gray-500">{log.entity} • by {log.user}</p>
                     </div>
-                    <span className="text-xs font-bold text-gray-400 bg-gray-100 px-2 py-1 rounded-lg">{log.time}</span>
+                    <span className="text-xs font-bold text-gray-400 bg-gray-100 px-2 py-1 rounded-3xl">{log.time}</span>
                   </div>
                 ))}
               </div>

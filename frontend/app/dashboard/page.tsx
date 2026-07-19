@@ -62,11 +62,11 @@ export default function DashboardPage() {
             {cards.map((card) => {
               const Icon = card.icon;
               return (
-                <div key={card.label} className="group relative bg-white/70 backdrop-blur-xl rounded-3xl p-8 border border-white shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 ease-out overflow-hidden">
+                <div key={card.label} className="group relative bg-white/70 backdrop-blur-xl rounded-3xl p-8 border border-white shadow-sm-xl hover:shadow-sm-2xl hover:-translate-y-1 transition-all duration-300 ease-out overflow-hidden">
                   <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br opacity-10 rounded-bl-full -mr-8 -mt-8 transition-transform duration-500 group-hover:scale-150"></div>
                   
                   <div className="flex justify-between items-start mb-6 relative z-10">
-                    <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${card.color} flex items-center justify-center shadow-lg shadow-black/10 text-white transform group-hover:rotate-6 transition-transform`}>
+                    <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${card.color} flex items-center justify-center shadow-sm-lg shadow-sm-black/10 text-white transform group-hover:rotate-6 transition-transform`}>
                       <Icon size={28} />
                     </div>
                     <div className={`flex items-center gap-1 text-sm font-bold px-3 py-1.5 rounded-full ${card.isUp ? 'bg-emerald-100 text-emerald-700' : 'bg-red-100 text-red-700'}`}>

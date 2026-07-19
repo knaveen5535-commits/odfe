@@ -1,3 +1,4 @@
+import { RoleType } from '@prisma/client';
 import { Request, Response } from 'express';
 import { z } from 'zod';
 import * as authService from '../services/auth.service';
@@ -9,7 +10,7 @@ const registerSchema = z.object({
   password: z.string().min(8),
   firstName: z.string().optional(),
   lastName: z.string().optional(),
-  role: z.string().optional(),
+  role: z.nativeEnum(RoleType).optional(),
 });
 
 const loginSchema = z.object({
@@ -19,7 +20,7 @@ const loginSchema = z.object({
 
 export async function register(req: Request, res: Response): Promise<void> {
   const data = registerSchema.parse(req.body);
-  const result = await authService.register({ ...data, role: data.role || 'ADMIN' });
+  const result = await authService.register({ ...data, role: data.role || RoleType.ADMIN });
   res.cookie('refreshToken', result.refreshToken, {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
@@ -75,6 +76,7 @@ export async function resetPassword(req: Request, res: Response): Promise<void> 
 const roleDepartmentMap: Record<string, string> = {
   ADMIN: 'Management',
   CASHIER: 'Cashier',
+  WAITER: 'Floor',
   KITCHEN_STAFF: 'Kitchen',
   BILLING: 'Billing',
 };

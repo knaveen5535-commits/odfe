@@ -14,7 +14,7 @@ export default function PaymentHistoryPage() {
         <div className="p-8 pb-4 flex-shrink-0 relative z-10">
           <div className="flex justify-between items-center mb-8">
             <div className="flex items-center gap-4">
-              <div className="bg-gradient-to-br from-[#A56A2B] to-[#8B5A2B] p-4 rounded-2xl shadow-xl shadow-[#A56A2B]/30 text-white">
+              <div className="bg-gradient-to-br from-[#A56A2B] to-[#8B5A2B] p-4 rounded-2xl shadow-sm-xl shadow-sm-[#A56A2B]/30 text-white">
                 <History size={32} />
               </div>
               <div>
@@ -23,10 +23,10 @@ export default function PaymentHistoryPage() {
               </div>
             </div>
             <div className="flex gap-4">
-              <button className="flex items-center gap-2 px-5 py-3 bg-white/60 backdrop-blur-md text-[#2C1810] font-bold rounded-2xl border border-white shadow-sm hover:shadow-md transition-all">
+              <button className="flex items-center gap-2 px-5 py-3 bg-white/60 backdrop-blur-md text-[#2C1810] font-bold rounded-2xl border border-white shadow-sm hover:shadow-sm-md transition-all">
                 <Calendar size={20} className="text-[#A56A2B]"/> Last 30 Days
               </button>
-              <button className="flex items-center gap-2 px-5 py-3 bg-[#2C1810] text-white font-bold rounded-2xl shadow-xl shadow-black/10 hover:bg-[#1a0f0a] hover:-translate-y-0.5 transition-all">
+              <button className="flex items-center gap-2 px-5 py-3 bg-[#2C1810] text-white font-bold rounded-2xl shadow-sm-xl shadow-sm-black/10 hover:bg-[#1a0f0a] hover:-translate-y-0.5 transition-all">
                 <Download size={20} /> Export Report
               </button>
             </div>
@@ -39,7 +39,7 @@ export default function PaymentHistoryPage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-8">
             
             {/* Primary Stat Card */}
-            <div className="lg:col-span-5 bg-gradient-to-br from-[#2C1810] to-[#4A2E20] rounded-[2rem] p-8 text-white relative overflow-hidden shadow-2xl">
+            <div className="lg:col-span-5 bg-gradient-to-br from-[#2C1810] to-[#4A2E20] rounded-[2rem] p-8 text-white relative overflow-hidden shadow-sm-2xl">
               <div className="absolute top-0 right-0 w-48 h-48 bg-[#A56A2B] rounded-full blur-[60px] opacity-40 -mr-10 -mt-10"></div>
               <div className="relative z-10 flex flex-col h-full justify-between">
                 <div>
@@ -70,12 +70,12 @@ export default function PaymentHistoryPage() {
                 { label: 'Cash Drawer', value: '$9,200', percent: '22%', icon: Banknote, color: 'text-emerald-600', bg: 'bg-emerald-100', border: 'border-emerald-200' },
                 { label: 'Digital/QR', value: '$5,200', percent: '12%', icon: Smartphone, color: 'text-purple-600', bg: 'bg-purple-100', border: 'border-purple-200' },
               ].map((stat, i) => (
-                <div key={i} className="bg-white/80 backdrop-blur-lg p-6 rounded-[2rem] border border-white shadow-xl shadow-[#2C1810]/5 flex flex-col justify-between group hover:-translate-y-1 transition-transform">
+                <div key={i} className="bg-white/80 backdrop-blur-lg p-6 rounded-[2rem] border border-white shadow-sm-xl shadow-sm-[#2C1810]/5 flex flex-col justify-between group hover:-translate-y-1 transition-transform">
                   <div className="flex justify-between items-start mb-4">
                     <div className={`p-3 rounded-2xl ${stat.bg} ${stat.color} ${stat.border} border group-hover:scale-110 transition-transform`}>
                       <stat.icon size={24} />
                     </div>
-                    <span className="text-sm font-bold text-[#6B5B4F] bg-[#F8F4EA] px-2.5 py-1 rounded-lg">{stat.percent}</span>
+                    <span className="text-sm font-bold text-[#6B5B4F] bg-[#F8F4EA] px-2.5 py-1 rounded-3xl">{stat.percent}</span>
                   </div>
                   <div>
                     <h3 className="text-3xl font-black text-[#2C1810] mb-1">{stat.value}</h3>
@@ -88,7 +88,7 @@ export default function PaymentHistoryPage() {
           </div>
 
           {/* Transactions Ledger */}
-          <div className="bg-white rounded-[2.5rem] shadow-2xl shadow-black/5 border border-white overflow-hidden relative">
+          <div className="bg-white rounded-[2.5rem] shadow-sm-2xl shadow-sm-black/5 border border-white overflow-hidden relative">
             <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-[#A56A2B] via-[#D97706] to-[#A56A2B]"></div>
             
             <div className="p-8 border-b border-[#E7DDCF]/50 flex justify-between items-center bg-gray-50/30">
@@ -130,13 +130,13 @@ export default function PaymentHistoryPage() {
                       <td className="px-8 py-6 text-sm font-bold text-[#6B5B4F]">{row.date}</td>
                       <td className="px-8 py-6 text-sm font-medium text-[#6B5B4F]">{row.term}</td>
                       <td className="px-8 py-6">
-                        <span className={`inline-flex items-center px-3 py-1 rounded-lg text-xs font-bold uppercase tracking-wider border ${row.statusColor}`}>
+                        <span className={`inline-flex items-center px-3 py-1 rounded-3xl text-xs font-bold uppercase tracking-wider border ${row.statusColor}`}>
                           {row.status}
                         </span>
                       </td>
                       <td className="px-8 py-6 font-black text-[#2C1810] text-lg">{row.amount}</td>
                       <td className="px-8 py-6 text-right">
-                        <button className="opacity-0 group-hover:opacity-100 text-[#A56A2B] font-bold text-sm bg-white border border-[#E7DDCF] shadow-sm px-4 py-2 rounded-lg transition-all hover:bg-[#F8F4EA]">
+                        <button className="opacity-0 group-hover:opacity-100 text-[#A56A2B] font-bold text-sm bg-white border border-[#E7DDCF] shadow-sm px-4 py-2 rounded-3xl transition-all hover:bg-[#F8F4EA]">
                           Details
                         </button>
                       </td>

@@ -1,3 +1,4 @@
+import { RoleType } from '@prisma/client';
 import { v4 as uuidv4 } from 'uuid';
 import { hashPassword, comparePassword } from '../utils/password';
 import { generateAccessToken, generateRefreshToken, verifyToken, TokenPayload } from '../utils/jwt';
@@ -12,12 +13,13 @@ interface RegisterParams {
   password: string;
   firstName?: string;
   lastName?: string;
-  role?: string;
+  role?: RoleType;
 }
 
 const roleDepartmentMap: Record<string, string> = {
   ADMIN: 'Management',
   CASHIER: 'Cashier',
+  WAITER: 'Floor',
   KITCHEN_STAFF: 'Kitchen',
   BILLING: 'Billing',
 };
@@ -32,7 +34,7 @@ export async function register(params: RegisterParams) {
     password: hashedPassword,
     firstName: params.firstName,
     lastName: params.lastName,
-    role: params.role as any,
+    role: params.role,
   });
 
   const payload: TokenPayload = { userId: user.id, email: user.email, role: user.role };

@@ -32,7 +32,7 @@ export default function PaymentsPage() {
         <div className="p-8 pb-4 flex-shrink-0">
           <div className="flex justify-between items-center mb-8">
             <div className="flex items-center gap-4">
-              <div className="bg-[#A56A2B] p-3 rounded-2xl shadow-lg shadow-[#A56A2B]/30 text-white">
+              <div className="bg-[#A56A2B] p-3 rounded-2xl shadow-sm-lg shadow-sm-[#A56A2B]/30 text-white">
                 <CreditCard size={32} />
               </div>
               <div>
@@ -44,7 +44,7 @@ export default function PaymentsPage() {
               <button className="flex items-center gap-2 px-4 py-2 bg-white text-[#2C1810] font-bold rounded-xl border border-[#E7DDCF] shadow-sm hover:bg-gray-50 transition-colors">
                 <Filter size={18} /> Filter
               </button>
-              <button className="flex items-center gap-2 px-4 py-2 bg-[#2C1810] text-white font-bold rounded-xl shadow-lg hover:bg-[#1a0f0a] transition-colors">
+              <button className="flex items-center gap-2 px-4 py-2 bg-[#2C1810] text-white font-bold rounded-xl shadow-sm-lg hover:bg-[#1a0f0a] transition-colors">
                 <Download size={18} /> Export
               </button>
             </div>
@@ -67,7 +67,7 @@ export default function PaymentsPage() {
 
         {/* Table Section */}
         <div className="flex-1 px-8 pb-8 overflow-hidden">
-          <div className="bg-white rounded-3xl shadow-xl shadow-black/5 border border-white h-full flex flex-col overflow-hidden">
+          <div className="bg-white rounded-3xl shadow-sm-xl shadow-sm-black/5 border border-white h-full flex flex-col overflow-hidden">
             <div className="overflow-x-auto flex-1">
               <table className="w-full text-left border-collapse">
                 <thead className="bg-gray-50/80 backdrop-blur-sm sticky top-0 z-10 border-b border-[#E7DDCF]">
@@ -132,8 +132,8 @@ export default function PaymentsPage() {
             <div className="bg-gray-50/80 backdrop-blur-sm border-t border-[#E7DDCF] px-6 py-4 flex items-center justify-between">
               <span className="text-sm font-medium text-[#6B5B4F]">Showing <span className="font-bold text-[#2C1810]">{filteredPayments.length}</span> results</span>
               <div className="flex gap-2">
-                <button className="px-4 py-2 border border-[#E7DDCF] rounded-lg text-sm font-bold text-[#2C1810] hover:bg-white transition-colors disabled:opacity-50" disabled>Previous</button>
-                <button className="px-4 py-2 border border-[#E7DDCF] rounded-lg text-sm font-bold text-[#2C1810] hover:bg-white transition-colors disabled:opacity-50" disabled>Next</button>
+                <button className="px-4 py-2 border border-[#E7DDCF] rounded-3xl text-sm font-bold text-[#2C1810] hover:bg-white transition-colors disabled:opacity-50" disabled>Previous</button>
+                <button className="px-4 py-2 border border-[#E7DDCF] rounded-3xl text-sm font-bold text-[#2C1810] hover:bg-white transition-colors disabled:opacity-50" disabled>Next</button>
               </div>
             </div>
           </div>

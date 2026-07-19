@@ -35,7 +35,7 @@ export default function ResetPasswordPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#F8F4EA] py-12">
-      <div className="bg-white rounded-2xl shadow-xl w-full max-w-md p-8 border border-[#E7DDCF]">
+      <div className="bg-white rounded-2xl shadow-sm-xl w-full max-w-md p-8 border border-[#E7DDCF]">
         <div className="text-center mb-8">
           <div className="flex items-center justify-center gap-2 mb-2">
             <Coffee size={28} className="text-[#A56A2B]" />

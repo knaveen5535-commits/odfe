@@ -32,7 +32,7 @@ export default function CustomersPage() {
         <div className="p-8 pb-6 flex-shrink-0 relative z-10">
           <div className="flex justify-between items-center mb-6">
             <div className="flex items-center gap-4">
-              <div className="bg-gradient-to-br from-[#A56A2B] to-[#8B5A2B] p-3 rounded-2xl shadow-lg shadow-[#A56A2B]/30 text-white">
+              <div className="bg-gradient-to-br from-[#A56A2B] to-[#8B5A2B] p-3 rounded-2xl shadow-sm-lg shadow-sm-[#A56A2B]/30 text-white">
                 <Users size={32} />
               </div>
               <div>
@@ -51,7 +51,7 @@ export default function CustomersPage() {
                   className="w-full pl-10 pr-4 py-2.5 bg-white rounded-xl shadow-sm border border-[#E7DDCF] focus:ring-2 focus:ring-[#A56A2B] outline-none text-[#2C1810] font-bold transition-all"
                 />
               </div>
-              <button className="flex items-center gap-2 px-5 py-2.5 bg-[#2C1810] text-white font-bold rounded-xl shadow-lg hover:bg-[#1a0f0a] hover:-translate-y-0.5 transition-all">
+              <button className="flex items-center gap-2 px-5 py-2.5 bg-[#2C1810] text-white font-bold rounded-xl shadow-sm-lg hover:bg-[#1a0f0a] hover:-translate-y-0.5 transition-all">
                 <UserPlus size={18} /> New Customer
               </button>
             </div>
@@ -59,7 +59,7 @@ export default function CustomersPage() {
         </div>
 
         <div className="flex-1 px-8 pb-8 overflow-hidden relative z-10">
-          <div className="bg-white/80 backdrop-blur-xl rounded-[2.5rem] shadow-2xl shadow-black/5 border border-white h-full flex flex-col overflow-hidden">
+          <div className="bg-white/80 backdrop-blur-xl rounded-[2.5rem] shadow-sm-2xl shadow-sm-black/5 border border-white h-full flex flex-col overflow-hidden">
             <div className="overflow-y-auto flex-1 p-0 no-scrollbar">
               <table className="w-full text-left border-collapse">
                 <thead className="bg-[#F8F4EA]/50 sticky top-0 backdrop-blur-md z-10">
@@ -74,7 +74,7 @@ export default function CustomersPage() {
                     <tr key={c.id} className="hover:bg-[#F8F4EA]/40 transition-colors group cursor-pointer">
                       <td className="px-8 py-5">
                         <div className="flex items-center gap-4">
-                          <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-gray-100 to-gray-200 border border-gray-300 text-gray-600 flex items-center justify-center text-lg font-black shadow-inner group-hover:from-[#A56A2B] group-hover:to-[#8B5A2B] group-hover:text-white group-hover:border-[#A56A2B] transition-all">
+                          <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-gray-100 to-gray-200 border border-gray-300 text-gray-600 flex items-center justify-center text-lg font-black shadow-sm-inner group-hover:from-[#A56A2B] group-hover:to-[#8B5A2B] group-hover:text-white group-hover:border-[#A56A2B] transition-all">
                             {c.name.charAt(0)}
                           </div>
                           <div>
@@ -91,17 +91,17 @@ export default function CustomersPage() {
                       </td>
                       <td className="px-8 py-5">
                         {c.isVip ? (
-                          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold bg-gradient-to-r from-amber-100 to-yellow-100 text-amber-700 border border-amber-200 shadow-sm">
+                          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-3xl text-xs font-bold bg-gradient-to-r from-amber-100 to-yellow-100 text-amber-700 border border-amber-200 shadow-sm">
                             <Crown size={14} className="text-amber-500 fill-amber-500"/> VIP Member
                           </span>
                         ) : (
-                          <span className="inline-flex px-3 py-1.5 rounded-lg text-xs font-bold bg-gray-50 text-gray-500 border border-gray-200">
+                          <span className="inline-flex px-3 py-1.5 rounded-3xl text-xs font-bold bg-gray-50 text-gray-500 border border-gray-200">
                             Standard
                           </span>
                         )}
                       </td>
                       <td className="px-8 py-5">
-                        <span className="font-black text-[#2C1810] bg-gray-50 px-3 py-1 rounded-lg border border-gray-100">{c.totalOrders}</span>
+                        <span className="font-black text-[#2C1810] bg-gray-50 px-3 py-1 rounded-3xl border border-gray-100">{c.totalOrders}</span>
                       </td>
                       <td className="px-8 py-5">
                         <span className="font-black text-[#A56A2B] text-xl">${c.totalSpent.toFixed(2)}</span>
@@ -127,8 +127,8 @@ export default function CustomersPage() {
             <div className="bg-[#F8F4EA]/50 p-4 border-t border-[#E7DDCF]/50 text-center flex justify-between items-center px-8">
               <p className="text-sm font-bold text-[#6B5B4F]">Showing {filteredCustomers.length} customers</p>
               <div className="flex gap-2">
-                <button className="px-3 py-1.5 text-sm font-bold text-gray-400 bg-white border border-gray-200 rounded-lg disabled:opacity-50" disabled>Previous</button>
-                <button className="px-3 py-1.5 text-sm font-bold text-[#2C1810] bg-white border border-[#E7DDCF] shadow-sm rounded-lg hover:bg-gray-50">Next</button>
+                <button className="px-3 py-1.5 text-sm font-bold text-gray-400 bg-white border border-gray-200 rounded-3xl disabled:opacity-50" disabled>Previous</button>
+                <button className="px-3 py-1.5 text-sm font-bold text-[#2C1810] bg-white border border-[#E7DDCF] shadow-sm rounded-3xl hover:bg-gray-50">Next</button>
               </div>
             </div>
           </div>

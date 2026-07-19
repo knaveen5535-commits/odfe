@@ -49,6 +49,7 @@ const errors_1 = require("../utils/errors");
 const roleDepartmentMap = {
     ADMIN: 'Management',
     CASHIER: 'Cashier',
+    WAITER: 'Floor',
     KITCHEN_STAFF: 'Kitchen',
     BILLING: 'Billing',
 };

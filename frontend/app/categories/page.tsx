@@ -14,16 +14,16 @@ export default function CategoriesPage() {
   }, []);
 
   return (
-    <div className="flex h-screen bg-background">
+    <div className="flex h-screen bg-[#F8F4EA]">
       <Sidebar />
       <div className="flex-1 p-8 overflow-auto">
-        <h1 className="text-2xl font-bold text-[#2B1D15] mb-6">Categories</h1>
+        <h1 className="text-2xl font-bold text-[#2C1810] mb-6">Categories</h1>
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {categories.map(c => (
-            <div key={c.id} className="bg-surface rounded-lg shadow border border-border p-4">
-              <p className="font-semibold text-[#2B1D15]">{c.name}</p>
-              <p className="text-sm text-secondary-text">Sequence: {c.sequence}</p>
-              <span className={`inline-block mt-2 px-2 py-1 rounded-full text-xs ${c.isActive ? 'bg-success/10 text-success' : 'bg-danger/10 text-danger'}`}>{c.isActive ? 'Active' : 'Inactive'}</span>
+            <div key={c.id} className="bg-white rounded-3xl shadow-sm border border-[#E7DDCF] p-4">
+              <p className="font-semibold text-[#2C1810]">{c.name}</p>
+              <p className="text-sm text-[#6B5B4F]">Sequence: {c.sequence}</p>
+              <span className={`inline-block mt-2 px-2 py-1 rounded-full text-xs ${c.isActive ? 'bg-emerald-50 text-emerald-600' : 'bg-red-50 text-red-600'}`}>{c.isActive ? 'Active' : 'Inactive'}</span>
             </div>
           ))}
         </div>

@@ -14,7 +14,7 @@ export default function SplitBillPage() {
         <div className="p-8 pb-4 flex-shrink-0">
           <div className="flex justify-between items-center mb-6">
             <div className="flex items-center gap-4">
-              <div className="bg-[#A56A2B] p-3 rounded-2xl shadow-lg shadow-[#A56A2B]/30 text-white">
+              <div className="bg-[#A56A2B] p-3 rounded-2xl shadow-sm-lg shadow-sm-[#A56A2B]/30 text-white">
                 <SplitSquareVertical size={32} />
               </div>
               <div>
@@ -80,7 +80,7 @@ export default function SplitBillPage() {
                   <div className="text-6xl font-black text-[#2C1810] w-20 text-center">{splitCount}</div>
                   <button 
                     onClick={() => setSplitCount(splitCount + 1)}
-                    className="w-16 h-16 rounded-full bg-[#A56A2B] text-white flex items-center justify-center hover:bg-[#8B5A2B] shadow-lg shadow-[#A56A2B]/30 transition-transform hover:scale-105"
+                    className="w-16 h-16 rounded-full bg-[#A56A2B] text-white flex items-center justify-center hover:bg-[#8B5A2B] shadow-sm-lg shadow-sm-[#A56A2B]/30 transition-transform hover:scale-105"
                   >
                     <Plus size={24} />
                   </button>
@@ -91,7 +91,7 @@ export default function SplitBillPage() {
                     <div key={i} className="bg-gradient-to-br from-[#F8F4EA] to-white border border-[#E7DDCF] rounded-2xl p-4 text-center">
                       <p className="text-[#6B5B4F] text-xs font-bold uppercase mb-1">Guest {i + 1}</p>
                       <p className="text-2xl font-black text-[#A56A2B]">${(totalAmount / splitCount).toFixed(2)}</p>
-                      <button className="mt-3 w-full py-2 bg-white border border-[#E7DDCF] rounded-lg text-sm font-bold text-[#2C1810] hover:border-[#A56A2B] transition-colors">
+                      <button className="mt-3 w-full py-2 bg-white border border-[#E7DDCF] rounded-3xl text-sm font-bold text-[#2C1810] hover:border-[#A56A2B] transition-colors">
                         Pay Now
                       </button>
                     </div>
@@ -103,7 +103,7 @@ export default function SplitBillPage() {
                 <button className="flex-1 bg-white border-2 border-[#E7DDCF] text-[#2C1810] font-black text-lg rounded-2xl py-4 hover:bg-gray-50 transition-colors">
                   Split by Items Instead
                 </button>
-                <button className="flex-1 bg-[#2C1810] text-white font-black text-lg rounded-2xl py-4 shadow-xl hover:bg-[#1a0f0a] transition-all flex items-center justify-center gap-2">
+                <button className="flex-1 bg-[#2C1810] text-white font-black text-lg rounded-2xl py-4 shadow-sm-xl hover:bg-[#1a0f0a] transition-all flex items-center justify-center gap-2">
                   Confirm Split <ArrowRight size={20} />
                 </button>
               </div>

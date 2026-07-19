@@ -67,7 +67,7 @@ export default function TablesPage() {
         <div className="p-8 pb-4 flex-shrink-0 z-10">
           <div className="flex justify-between items-center mb-6">
             <div className="flex items-center gap-4">
-              <div className="bg-gradient-to-br from-[#A56A2B] to-[#8B5A2B] p-3 rounded-2xl shadow-lg shadow-[#A56A2B]/30 text-white">
+              <div className="bg-gradient-to-br from-[#A56A2B] to-[#8B5A2B] p-3 rounded-2xl shadow-sm-lg shadow-sm-[#A56A2B]/30 text-white">
                 <LayoutGrid size={32} />
               </div>
               <div>
@@ -79,7 +79,7 @@ export default function TablesPage() {
               <button className="flex items-center gap-2 px-4 py-2 bg-white text-[#2C1810] font-bold rounded-xl border border-[#E7DDCF] shadow-sm hover:bg-gray-50 transition-colors">
                 <Settings2 size={18} /> Layout
               </button>
-              <button className="flex items-center gap-2 px-4 py-2 bg-[#2C1810] text-white font-bold rounded-xl shadow-lg hover:bg-[#1a0f0a] transition-colors">
+              <button className="flex items-center gap-2 px-4 py-2 bg-[#2C1810] text-white font-bold rounded-xl shadow-sm-lg hover:bg-[#1a0f0a] transition-colors">
                 <Plus size={18} /> Add Table
               </button>
             </div>
@@ -107,13 +107,13 @@ export default function TablesPage() {
                 return (
                   <div 
                     key={t.id} 
-                    className={`relative rounded-[2rem] p-6 cursor-pointer border shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group ${styles.bg}`}
+                    className={`relative rounded-[2rem] p-6 cursor-pointer border shadow-sm hover:shadow-sm-xl hover:-translate-y-1 transition-all duration-300 group ${styles.bg}`}
                     onContextMenu={(e) => handleContextMenu(e, t.id)}
                     onClick={() => router.push(`/pos?tableId=${t.id}`)}
                   >
                     <div className="flex justify-between items-start mb-4">
                       <h3 className={`text-2xl font-black ${styles.text}`}>{t.name}</h3>
-                      <button className={`p-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity bg-white/50 hover:bg-white text-gray-600`} onClick={(e) => { e.stopPropagation(); handleContextMenu(e, t.id); }}>
+                      <button className={`p-1.5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity bg-white/50 hover:bg-white text-gray-600`} onClick={(e) => { e.stopPropagation(); handleContextMenu(e, t.id); }}>
                         <MoreHorizontal size={18} />
                       </button>
                     </div>
@@ -128,7 +128,7 @@ export default function TablesPage() {
                     </div>
 
                     <div className="mt-auto">
-                      <span className={`inline-flex px-3 py-1 text-xs font-bold uppercase tracking-wider rounded-lg border ${styles.badge}`}>
+                      <span className={`inline-flex px-3 py-1 text-xs font-bold uppercase tracking-wider rounded-3xl border ${styles.badge}`}>
                         {t.status}
                       </span>
                     </div>
@@ -149,7 +149,7 @@ export default function TablesPage() {
         {contextMenu && (
           <div className="fixed inset-0 z-40" onClick={() => setContextMenu(null)}>
             <div 
-              className="absolute bg-white/90 backdrop-blur-xl rounded-2xl shadow-2xl py-2 w-48 z-50 border border-white overflow-hidden transform scale-100 opacity-100 transition-all origin-top-left"
+              className="absolute bg-white/90 backdrop-blur-xl rounded-2xl shadow-sm-2xl py-2 w-48 z-50 border border-white overflow-hidden transform scale-100 opacity-100 transition-all origin-top-left"
               style={{ top: contextMenu.y, left: contextMenu.x }}
               onClick={(e) => e.stopPropagation()}
             >

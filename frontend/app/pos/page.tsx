@@ -105,7 +105,7 @@ export default function POSPage() {
                 placeholder="Search products..." 
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-12 pr-4 py-3 bg-white rounded-2xl shadow-sm border border-[#E7DDCF] focus:ring-2 focus:ring-[#A56A2B] outline-none transition-shadow text-[#2C1810] font-bold"
+                className="w-full pl-12 pr-4 py-3 bg-white rounded-2xl shadow-sm border border-[#E7DDCF] focus:ring-2 focus:ring-[#A56A2B] outline-none transition-shadow-sm text-[#2C1810] font-bold"
               />
             </div>
           </div>
@@ -115,7 +115,7 @@ export default function POSPage() {
             <div className="flex gap-3">
               <button
                 onClick={() => setActiveCategory('all')}
-                className={`px-6 py-2.5 rounded-xl font-bold whitespace-nowrap transition-all ${activeCategory === 'all' ? 'bg-[#A56A2B] text-white shadow-lg shadow-[#A56A2B]/40 transform scale-105' : 'bg-white text-[#6B5B4F] border border-[#E7DDCF] hover:bg-gray-50'}`}
+                className={`px-6 py-2.5 rounded-xl font-bold whitespace-nowrap transition-all ${activeCategory === 'all' ? 'bg-[#A56A2B] text-white shadow-sm-lg shadow-sm-[#A56A2B]/40 transform scale-105' : 'bg-white text-[#6B5B4F] border border-[#E7DDCF] hover:bg-gray-50'}`}
               >
                 All Items
               </button>
@@ -123,7 +123,7 @@ export default function POSPage() {
                 <button
                   key={cat}
                   onClick={() => setActiveCategory(cat)}
-                  className={`px-6 py-2.5 rounded-xl font-bold whitespace-nowrap transition-all ${activeCategory === cat ? 'bg-[#A56A2B] text-white shadow-lg shadow-[#A56A2B]/40 transform scale-105' : 'bg-white text-[#6B5B4F] border border-[#E7DDCF] hover:bg-gray-50'}`}
+                  className={`px-6 py-2.5 rounded-xl font-bold whitespace-nowrap transition-all ${activeCategory === cat ? 'bg-[#A56A2B] text-white shadow-sm-lg shadow-sm-[#A56A2B]/40 transform scale-105' : 'bg-white text-[#6B5B4F] border border-[#E7DDCF] hover:bg-gray-50'}`}
                 >
                   {cat}
                 </button>
@@ -143,7 +143,7 @@ export default function POSPage() {
                   <button 
                     key={product.id} 
                     onClick={() => addToCart(product)}
-                    className="group bg-white rounded-3xl p-4 flex flex-col text-left shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-[#E7DDCF] hover:border-[#A56A2B]/30 relative overflow-hidden active:scale-95"
+                    className="group bg-white rounded-3xl p-4 flex flex-col text-left shadow-sm hover:shadow-sm-xl hover:-translate-y-1 transition-all duration-300 border border-[#E7DDCF] hover:border-[#A56A2B]/30 relative overflow-hidden active:scale-95"
                   >
                     <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-[#A56A2B]/10 to-transparent rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-125"></div>
                     
@@ -170,7 +170,7 @@ export default function POSPage() {
 
         {/* Cart Sidebar (Floating Glassmorphic Panel) */}
         <div className="w-96 shrink-0 h-full p-4 pl-0">
-          <div className="bg-white/80 backdrop-blur-xl h-full rounded-[2rem] shadow-2xl border border-white/50 flex flex-col relative overflow-hidden">
+          <div className="bg-white/80 backdrop-blur-xl h-full rounded-[2rem] shadow-sm-2xl border border-white/50 flex flex-col relative overflow-hidden">
             
             <div className="p-6 pb-4 border-b border-[#E7DDCF]/50 flex justify-between items-center bg-white/50">
               <h2 className="text-2xl font-black text-[#2C1810] flex items-center gap-2">
@@ -208,7 +208,7 @@ export default function POSPage() {
             </div>
 
             {/* Payment Section */}
-            <div className="bg-white p-6 border-t border-[#E7DDCF]/50 shadow-[0_-10px_40px_rgba(0,0,0,0.05)]">
+            <div className="bg-white p-6 border-t border-[#E7DDCF]/50 shadow-sm-[0_-10px_40px_rgba(0,0,0,0.05)]">
               <div className="space-y-2 mb-6">
                 <div className="flex justify-between text-[#6B5B4F] font-bold">
                   <span>Subtotal</span><span>${subtotal.toFixed(2)}</span>
@@ -245,7 +245,7 @@ export default function POSPage() {
               <button
                 disabled={cart.length === 0 || !selectedPayment}
                 onClick={placeOrder}
-                className="w-full py-4 bg-gradient-to-r from-[#A56A2B] to-[#8B5A2B] text-white text-xl font-black rounded-2xl shadow-xl shadow-[#A56A2B]/30 transition-all hover:scale-[1.02] active:scale-95 disabled:opacity-50 disabled:hover:scale-100 flex items-center justify-center gap-2"
+                className="w-full py-4 bg-gradient-to-r from-[#A56A2B] to-[#8B5A2B] text-white text-xl font-black rounded-2xl shadow-sm-xl shadow-sm-[#A56A2B]/30 transition-all hover:scale-[1.02] active:scale-95 disabled:opacity-50 disabled:hover:scale-100 flex items-center justify-center gap-2"
               >
                 {cart.length === 0 ? 'Cart is Empty' : !selectedPayment ? 'Select Payment' : `Pay $${total.toFixed(2)}`}
               </button>

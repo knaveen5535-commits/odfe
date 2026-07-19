@@ -38,10 +38,18 @@ async function getById(req, res) {
     res.json({ success: true, data: order });
 }
 async function create(req, res) {
-    const { items, ...orderData } = req.body;
+    const { items, customerId, tableId, orderType, note, sessionId } = req.body;
+    const employee = await index_1.prisma.employee.findUnique({ where: { userId: req.user.userId } });
+    if (!employee)
+        throw new errors_1.UnauthorizedError('No employee profile found for this user');
     const order = await index_1.prisma.order.create({
         data: {
-            ...orderData,
+            employeeId: employee.id,
+            customerId: customerId || null,
+            tableId: tableId || null,
+            orderType: orderType || 'dine_in',
+            note: note || null,
+            sessionId: sessionId || null,
             orderRef: `ORD-${Date.now()}`,
             orderLines: {
                 create: items.map((item) => ({

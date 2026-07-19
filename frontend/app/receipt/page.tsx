@@ -10,7 +10,7 @@ export default function ReceiptPage() {
         <div className="p-8 pb-4 flex-shrink-0">
           <div className="flex justify-between items-center mb-6">
             <div className="flex items-center gap-4">
-              <div className="bg-[#A56A2B] p-3 rounded-2xl shadow-lg shadow-[#A56A2B]/30 text-white">
+              <div className="bg-[#A56A2B] p-3 rounded-2xl shadow-sm-lg shadow-sm-[#A56A2B]/30 text-white">
                 <Receipt size={32} />
               </div>
               <div>
@@ -33,7 +33,7 @@ export default function ReceiptPage() {
 
         <div className="flex-1 px-8 pb-8 flex justify-center overflow-y-auto">
           {/* Virtual Receipt Display */}
-          <div className="w-full max-w-md bg-white rounded-t-3xl rounded-b-xl shadow-2xl flex flex-col overflow-hidden border border-[#E7DDCF] relative">
+          <div className="w-full max-w-md bg-white rounded-t-3xl rounded-b-xl shadow-sm-2xl flex flex-col overflow-hidden border border-[#E7DDCF] relative">
             <div className="absolute top-0 left-0 right-0 h-4 bg-gradient-to-r from-[#A56A2B] to-[#D97706]"></div>
             
             <div className="p-8 flex-1">
@@ -109,7 +109,7 @@ export default function ReceiptPage() {
               <button className="flex-1 flex justify-center items-center gap-2 py-3 bg-white border border-[#E7DDCF] rounded-xl text-sm font-bold text-[#2C1810] hover:bg-gray-50 transition-colors shadow-sm">
                 <Download size={18} /> PDF
               </button>
-              <button className="flex-1 flex justify-center items-center gap-2 py-3 bg-[#2C1810] rounded-xl text-sm font-bold text-white hover:bg-[#1a0f0a] transition-colors shadow-lg">
+              <button className="flex-1 flex justify-center items-center gap-2 py-3 bg-[#2C1810] rounded-xl text-sm font-bold text-white hover:bg-[#1a0f0a] transition-colors shadow-sm-lg">
                 <Printer size={18} /> Print
               </button>
             </div>

@@ -14,19 +14,19 @@ export default function ProductsPage() {
   }, []);
 
   return (
-    <div className="flex h-screen bg-background">
+    <div className="flex h-screen bg-[#F8F4EA]">
       <Sidebar />
       <div className="flex-1 p-8 overflow-auto">
-        <h1 className="text-2xl font-bold text-[#2B1D15] mb-6">Products</h1>
+        <h1 className="text-2xl font-bold text-[#2C1810] mb-6">Products</h1>
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {products.map(p => (
-            <div key={p.id} className="bg-surface rounded-lg shadow border border-border p-4">
-              <p className="font-semibold text-[#2B1D15]">{p.name}</p>
-              <p className="text-primary font-bold">${p.salePrice.toFixed(2)}</p>
-              <p className="text-sm text-secondary-text">{p.category.name}</p>
+            <div key={p.id} className="bg-white rounded-3xl shadow-sm border border-[#E7DDCF] p-4">
+              <p className="font-semibold text-[#2C1810]">{p.name}</p>
+              <p className="text-[#A56A2B] font-bold">${p.salePrice.toFixed(2)}</p>
+              <p className="text-sm text-[#6B5B4F]">{p.category.name}</p>
               <div className="flex gap-2 mt-2">
-                <span className={`px-2 py-1 rounded-full text-xs ${p.isActive ? 'bg-success/10 text-success' : 'bg-danger/10 text-danger'}`}>{p.isActive ? 'Active' : 'Inactive'}</span>
-                <span className={`px-2 py-1 rounded-full text-xs ${p.isAvailable ? 'bg-primary/10 text-primary' : 'bg-background text-secondary-text'}`}>{p.isAvailable ? 'Available' : 'Unavailable'}</span>
+                <span className={`px-2 py-1 rounded-full text-xs ${p.isActive ? 'bg-emerald-50 text-emerald-600' : 'bg-red-50 text-red-600'}`}>{p.isActive ? 'Active' : 'Inactive'}</span>
+                <span className={`px-2 py-1 rounded-full text-xs ${p.isAvailable ? 'bg-[#A56A2B]/10 text-[#A56A2B]' : 'bg-[#F8F4EA] text-[#6B5B4F]'}`}>{p.isAvailable ? 'Available' : 'Unavailable'}</span>
               </div>
             </div>
           ))}

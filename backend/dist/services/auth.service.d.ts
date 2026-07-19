@@ -1,9 +1,10 @@
+import { RoleType } from '@prisma/client';
 interface RegisterParams {
     email: string;
     password: string;
     firstName?: string;
     lastName?: string;
-    role?: string;
+    role?: RoleType;
 }
 export declare function register(params: RegisterParams): Promise<{
     user: {

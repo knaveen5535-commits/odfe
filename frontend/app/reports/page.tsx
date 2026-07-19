@@ -19,15 +19,15 @@ export default function ReportsPage() {
   };
 
   return (
-    <div className="flex h-screen bg-background">
+    <div className="flex h-screen bg-[#F8F4EA]">
       <Sidebar />
       <div className="flex-1 p-8 overflow-auto">
-        <h1 className="text-2xl font-bold text-[#2B1D15] mb-6">Reports</h1>
-        <div className="bg-surface rounded-lg shadow border border-border p-6 max-w-lg">
+        <h1 className="text-2xl font-bold text-[#2C1810] mb-6">Reports</h1>
+        <div className="bg-white rounded-3xl shadow-sm border border-[#E7DDCF] p-6 max-w-lg">
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-[#2B1D15]">Report Type</label>
-              <select value={reportType} onChange={e => setReportType(e.target.value)} className="mt-1 block w-full rounded-md border border-border px-3 py-2 text-[#2B1D15] bg-background">
+              <label className="block text-sm font-medium text-[#2C1810]">Report Type</label>
+              <select value={reportType} onChange={e => setReportType(e.target.value)} className="mt-1 block w-full rounded-md border border-[#E7DDCF] px-3 py-2 text-[#2C1810] bg-[#F8F4EA]">
                 <option value="sales">Sales Report</option>
                 <option value="revenue">Revenue Report</option>
                 <option value="employee">Employee Report</option>
@@ -35,14 +35,14 @@ export default function ReportsPage() {
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-[#2B1D15]">From Date</label>
-              <input type="date" value={dateFrom} onChange={e => setDateFrom(e.target.value)} className="mt-1 block w-full rounded-md border border-border px-3 py-2 text-[#2B1D15] bg-background" />
+              <label className="block text-sm font-medium text-[#2C1810]">From Date</label>
+              <input type="date" value={dateFrom} onChange={e => setDateFrom(e.target.value)} className="mt-1 block w-full rounded-md border border-[#E7DDCF] px-3 py-2 text-[#2C1810] bg-[#F8F4EA]" />
             </div>
             <div>
-              <label className="block text-sm font-medium text-[#2B1D15]">To Date</label>
-              <input type="date" value={dateTo} onChange={e => setDateTo(e.target.value)} className="mt-1 block w-full rounded-md border border-border px-3 py-2 text-[#2B1D15] bg-background" />
+              <label className="block text-sm font-medium text-[#2C1810]">To Date</label>
+              <input type="date" value={dateTo} onChange={e => setDateTo(e.target.value)} className="mt-1 block w-full rounded-md border border-[#E7DDCF] px-3 py-2 text-[#2C1810] bg-[#F8F4EA]" />
             </div>
-            <button onClick={generateReport} className="w-full bg-primary text-white rounded-md py-2 hover:bg-primary-hover transition">Generate Report</button>
+            <button onClick={generateReport} className="w-full bg-[#A56A2B] text-white rounded-md py-2 hover:bg-[#A56A2B]-hover transition">Generate Report</button>
           </div>
         </div>
       </div>

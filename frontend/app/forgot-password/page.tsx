@@ -30,7 +30,7 @@ export default function ForgotPasswordPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#F8F4EA] py-12">
-      <div className="bg-white rounded-2xl shadow-xl w-full max-w-md p-8 border border-[#E7DDCF]">
+      <div className="bg-white rounded-2xl shadow-sm-xl w-full max-w-md p-8 border border-[#E7DDCF]">
         <div className="text-center mb-8">
           <div className="flex items-center justify-center gap-2 mb-2">
             <Coffee size={28} className="text-[#A56A2B]" />
@@ -45,12 +45,12 @@ export default function ForgotPasswordPage() {
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                 <Mail className="h-5 w-5 text-[#6B5B4F]" />
               </div>
-              <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="block w-full pl-10 pr-3 py-2.5 border border-[#E7DDCF] rounded-lg shadow-sm focus:ring-[#A56A2B] focus:border-[#A56A2B] text-sm text-[#2C1810] bg-[#F8F4EA]" placeholder="you@example.com" required />
+              <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="block w-full pl-10 pr-3 py-2.5 border border-[#E7DDCF] rounded-3xl shadow-sm focus:ring-[#A56A2B] focus:border-[#A56A2B] text-sm text-[#2C1810] bg-[#F8F4EA]" placeholder="you@example.com" required />
             </div>
           </div>
-          {message && <div className="bg-green-50 border border-green-200 text-[#16A34A] px-4 py-3 rounded-lg text-sm">{message}</div>}
-          {error && <div className="bg-red-50 border border-red-200 text-[#DC2626] px-4 py-3 rounded-lg text-sm">{error}</div>}
-          <button type="submit" disabled={isLoading} className="w-full bg-[#A56A2B] text-white rounded-lg py-2.5 px-4 hover:bg-[#8B5A2B] transition disabled:opacity-70 flex items-center justify-center gap-2">
+          {message && <div className="bg-green-50 border border-green-200 text-[#16A34A] px-4 py-3 rounded-3xl text-sm">{message}</div>}
+          {error && <div className="bg-red-50 border border-red-200 text-[#DC2626] px-4 py-3 rounded-3xl text-sm">{error}</div>}
+          <button type="submit" disabled={isLoading} className="w-full bg-[#A56A2B] text-white rounded-3xl py-2.5 px-4 hover:bg-[#8B5A2B] transition disabled:opacity-70 flex items-center justify-center gap-2">
             {isLoading ? <><Loader2 className="animate-spin h-5 w-5" /> Sending...</> : 'Send Reset Link'}
           </button>
         </form>

@@ -72,7 +72,7 @@ export default function LandingPage() {
       <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white/80 backdrop-blur-xl border-b border-[#E7DDCF] shadow-sm py-4' : 'bg-transparent py-6'}`}>
         <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
           <Link href="/" className="flex items-center gap-2 group">
-            <div className="bg-gradient-to-br from-[#A56A2B] to-[#8B5A2B] p-2 rounded-xl text-white shadow-lg shadow-[#A56A2B]/20 group-hover:scale-105 transition-transform">
+            <div className="bg-gradient-to-br from-[#A56A2B] to-[#8B5A2B] p-2 rounded-xl text-white shadow-sm-lg shadow-sm-[#A56A2B]/20 group-hover:scale-105 transition-transform">
               <Coffee size={24} />
             </div>
             <span className="text-2xl font-black text-[#2C1810] tracking-tight">ODFE</span>
@@ -82,7 +82,7 @@ export default function LandingPage() {
             <Link href="/login" className="text-[#6B5B4F] font-bold hover:text-[#A56A2B] transition-colors">
               Sign In
             </Link>
-            <Link href="/login" className="bg-[#2C1810] text-white px-6 py-2.5 rounded-full font-bold shadow-lg shadow-black/10 hover:bg-[#1a0f0a] hover:scale-105 transition-all">
+            <Link href="/login" className="bg-[#2C1810] text-white px-6 py-2.5 rounded-full font-bold shadow-sm-lg shadow-sm-black/10 hover:bg-[#1a0f0a] hover:scale-105 transition-all">
               Get Started
             </Link>
           </div>
@@ -110,10 +110,10 @@ export default function LandingPage() {
               </p>
               
               <div className="flex flex-wrap items-center gap-4 pt-4">
-                <Link href="/login" className="flex items-center gap-2 bg-gradient-to-r from-[#A56A2B] to-[#8B5A2B] text-white px-8 py-4 rounded-full font-bold text-lg shadow-xl shadow-[#A56A2B]/30 hover:shadow-2xl hover:-translate-y-1 transition-all">
+                <Link href="/login" className="flex items-center gap-2 bg-gradient-to-r from-[#A56A2B] to-[#8B5A2B] text-white px-8 py-4 rounded-full font-bold text-lg shadow-sm-xl shadow-sm-[#A56A2B]/30 hover:shadow-sm-2xl hover:-translate-y-1 transition-all">
                   Explore Platform <ArrowRight size={20} />
                 </Link>
-                <Link href="#demo" className="flex items-center gap-2 bg-white text-[#2C1810] px-8 py-4 rounded-full font-bold text-lg shadow-md border border-[#E7DDCF] hover:bg-gray-50 transition-all">
+                <Link href="#demo" className="flex items-center gap-2 bg-white text-[#2C1810] px-8 py-4 rounded-full font-bold text-lg shadow-sm-md border border-[#E7DDCF] hover:bg-gray-50 transition-all">
                   <PlayCircle size={20} className="text-[#A56A2B]" /> Watch Demo
                 </Link>
               </div>
@@ -135,7 +135,7 @@ export default function LandingPage() {
             
             <div className="relative group">
               <div className="absolute -inset-4 bg-gradient-to-br from-[#A56A2B]/20 to-[#D97706]/20 rounded-[2.5rem] blur-xl group-hover:blur-2xl transition-all duration-500 opacity-70"></div>
-              <div className="relative bg-white rounded-[2rem] p-3 shadow-2xl border border-white/50 aspect-video overflow-hidden" id="demo">
+              <div className="relative bg-white rounded-[2rem] p-3 shadow-sm-2xl border border-white/50 aspect-video overflow-hidden" id="demo">
                 <iframe 
                   className="w-full h-full rounded-2xl"
                   src="https://www.youtube.com/embed/vA_ptd7F0h4?autoplay=1&mute=1&loop=1&playlist=vA_ptd7F0h4&controls=0&rel=0" 
@@ -168,7 +168,7 @@ export default function LandingPage() {
               { icon: BarChart3, title: 'Reports & Analytics', desc: 'Deep insights into sales, top products, and peak hours.' },
               { icon: Calendar, title: 'Bookings', desc: 'Manage reservations and private events effortlessly.' },
             ].map((module, i) => (
-              <div key={i} className="bg-white/60 backdrop-blur-lg rounded-3xl p-8 border border-white shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 group cursor-default">
+              <div key={i} className="bg-white/60 backdrop-blur-lg rounded-3xl p-8 border border-white shadow-sm-lg hover:shadow-sm-2xl hover:-translate-y-2 transition-all duration-300 group cursor-default">
                 <div className="w-14 h-14 rounded-2xl bg-[#F8F4EA] flex items-center justify-center text-[#A56A2B] mb-6 group-hover:scale-110 group-hover:bg-[#A56A2B] group-hover:text-white transition-all">
                   <module.icon size={28} />
                 </div>
@@ -207,8 +207,8 @@ export default function LandingPage() {
               </div>
               <div className="relative">
                 <div className="aspect-square bg-gradient-to-br from-[#A56A2B]/10 to-[#F8F4EA] rounded-full absolute -inset-10 blur-3xl opacity-50"></div>
-                <div className="relative bg-[#F8F4EA] rounded-[3rem] p-12 border border-[#E7DDCF] shadow-2xl flex flex-col items-center text-center">
-                  <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center shadow-lg text-[#A56A2B] mb-8">
+                <div className="relative bg-[#F8F4EA] rounded-[3rem] p-12 border border-[#E7DDCF] shadow-sm-2xl flex flex-col items-center text-center">
+                  <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center shadow-sm-lg text-[#A56A2B] mb-8">
                     <Coffee size={48} />
                   </div>
                   <h3 className="text-3xl font-black text-[#2C1810] mb-4">Built for Coffee.</h3>
@@ -221,14 +221,14 @@ export default function LandingPage() {
 
         {/* CTA SECTION */}
         <section className="max-w-5xl mx-auto px-6 text-center">
-          <div className="bg-gradient-to-br from-[#2C1810] to-[#1a0f0a] rounded-[3rem] p-16 shadow-2xl relative overflow-hidden">
+          <div className="bg-gradient-to-br from-[#2C1810] to-[#1a0f0a] rounded-[3rem] p-16 shadow-sm-2xl relative overflow-hidden">
             <div className="absolute top-0 right-0 w-64 h-64 bg-[#A56A2B] rounded-full blur-[100px] opacity-30"></div>
             <div className="absolute bottom-0 left-0 w-64 h-64 bg-[#D97706] rounded-full blur-[100px] opacity-20"></div>
             
             <div className="relative z-10">
               <h2 className="text-4xl md:text-5xl font-black text-white mb-6">Ready to elevate your cafe?</h2>
               <p className="text-xl text-gray-300 font-medium mb-10 max-w-2xl mx-auto">Join hundreds of premium cafes running their operations beautifully on ODFE.</p>
-              <Link href="/login" className="inline-flex items-center gap-2 bg-white text-[#2C1810] px-10 py-5 rounded-full font-black text-lg shadow-xl hover:bg-gray-100 hover:scale-105 transition-all">
+              <Link href="/login" className="inline-flex items-center gap-2 bg-white text-[#2C1810] px-10 py-5 rounded-full font-black text-lg shadow-sm-xl hover:bg-gray-100 hover:scale-105 transition-all">
                 Get Started Today <ArrowRight size={20} />
               </Link>
             </div>

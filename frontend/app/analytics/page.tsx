@@ -10,7 +10,7 @@ export default function AnalyticsPage() {
         <div className="p-8 pb-4">
           <div className="flex justify-between items-center mb-8">
             <div className="flex items-center gap-4">
-              <div className="bg-[#A56A2B] p-3 rounded-2xl shadow-lg shadow-[#A56A2B]/30 text-white">
+              <div className="bg-[#A56A2B] p-3 rounded-2xl shadow-sm-lg shadow-sm-[#A56A2B]/30 text-white">
                 <BarChart3 size={32} />
               </div>
               <div>
@@ -36,7 +36,7 @@ export default function AnalyticsPage() {
               { label: 'Customer Retention', value: '86.2%', icon: Users, color: 'text-blue-500', bg: 'bg-blue-100' },
               { label: 'Avg Conversion', value: '12.4%', icon: Activity, color: 'text-purple-500', bg: 'bg-purple-100' }
             ].map((kpi, i) => (
-              <div key={i} className="bg-white p-6 rounded-3xl border border-[#E7DDCF] shadow-sm hover:shadow-md transition-shadow flex items-center justify-between group">
+              <div key={i} className="bg-white p-6 rounded-3xl border border-[#E7DDCF] shadow-sm hover:shadow-sm-md transition-shadow-sm flex items-center justify-between group">
                 <div>
                   <p className="text-[#6B5B4F] text-sm font-bold uppercase tracking-wide mb-1">{kpi.label}</p>
                   <h3 className="text-3xl font-black text-[#2C1810]">{kpi.value}</h3>

@@ -70,7 +70,7 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#F8F4EA] p-4 py-12">
       <div className="w-full max-w-5xl grid md:grid-cols-2 gap-8 items-start">
-        <div className="bg-white rounded-2xl shadow-xl p-8 w-full">
+        <div className="bg-white rounded-2xl shadow-sm-xl p-8 w-full">
           <div className="text-center mb-8">
             <div className="flex items-center justify-center gap-2 mb-2">
               <Coffee size={28} className="text-[#A56A2B]" />
@@ -90,7 +90,7 @@ export default function LoginPage() {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="block w-full pl-10 pr-3 py-2.5 border border-[#E7DDCF] rounded-lg shadow-sm focus:ring-[#A56A2B] focus:border-[#A56A2B] text-sm text-[#2C1810] placeholder-[#6B5B4F] bg-[#F8F4EA]"
+                  className="block w-full pl-10 pr-3 py-2.5 border border-[#E7DDCF] rounded-3xl shadow-sm focus:ring-[#A56A2B] focus:border-[#A56A2B] text-sm text-[#2C1810] placeholder-[#6B5B4F] bg-[#F8F4EA]"
                   placeholder="admin@odfe.local"
                   autoComplete="email"
                   required
@@ -108,7 +108,7 @@ export default function LoginPage() {
                   type={showPassword ? 'text' : 'password'}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="block w-full pl-10 pr-10 py-2.5 border border-[#E7DDCF] rounded-lg shadow-sm focus:ring-[#A56A2B] focus:border-[#A56A2B] text-sm text-[#2C1810] placeholder-[#6B5B4F] bg-[#F8F4EA]"
+                  className="block w-full pl-10 pr-10 py-2.5 border border-[#E7DDCF] rounded-3xl shadow-sm focus:ring-[#A56A2B] focus:border-[#A56A2B] text-sm text-[#2C1810] placeholder-[#6B5B4F] bg-[#F8F4EA]"
                   placeholder="••••••••"
                   autoComplete="current-password"
                   required
@@ -138,7 +138,7 @@ export default function LoginPage() {
             </div>
 
             {error && (
-              <div className="bg-red-50 border border-red-200 text-[#DC2626] px-4 py-3 rounded-lg text-sm" role="alert">
+              <div className="bg-red-50 border border-red-200 text-[#DC2626] px-4 py-3 rounded-3xl text-sm" role="alert">
                 {error}
               </div>
             )}
@@ -146,7 +146,7 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-[#A56A2B] hover:bg-[#8B5A2B] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#A56A2B] disabled:opacity-70 transition-all"
+              className="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-3xl shadow-sm text-sm font-medium text-white bg-[#A56A2B] hover:bg-[#8B5A2B] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#A56A2B] disabled:opacity-70 transition-all"
             >
               {isLoading ? (
                 <><Loader2 className="animate-spin h-5 w-5 mr-2" /> Authenticating...</>
@@ -166,7 +166,7 @@ export default function LoginPage() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 flex-1">
             {DEMO_ACCOUNTS.map((acc, i) => (
-              <div key={i} className="bg-white rounded-xl p-4 shadow flex flex-col justify-between border border-[#E7DDCF]">
+              <div key={i} className="bg-white rounded-xl p-4 shadow-sm flex flex-col justify-between border border-[#E7DDCF]">
                 <div>
                   <h3 className="font-bold text-[#2C1810] flex items-center justify-between">
                     {acc.name}
@@ -181,7 +181,7 @@ export default function LoginPage() {
                 <button
                   type="button"
                   onClick={() => fillDemoCredentials(acc.email, acc.pass)}
-                  className="mt-4 w-full bg-[#F8F4EA] hover:bg-[#E7DDCF] text-[#A56A2B] border border-[#E7DDCF] font-medium py-1.5 px-3 rounded-lg text-sm transition-colors"
+                  className="mt-4 w-full bg-[#F8F4EA] hover:bg-[#E7DDCF] text-[#A56A2B] border border-[#E7DDCF] font-medium py-1.5 px-3 rounded-3xl text-sm transition-colors"
                 >
                   Use Credentials
                 </button>

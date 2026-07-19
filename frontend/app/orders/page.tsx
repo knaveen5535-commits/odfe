@@ -20,13 +20,13 @@ export default function OrdersPage() {
 
   const getStatusBadge = (status: string) => {
     switch (status) {
-      case 'DRAFT': return <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-bold bg-gray-100 text-gray-600 border border-gray-200"><Clock size={12}/> DRAFT</span>;
-      case 'CONFIRMED': return <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-bold bg-blue-100 text-blue-700 border border-blue-200"><CheckCircle2 size={12}/> CONFIRMED</span>;
-      case 'PREPARING': return <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-bold bg-amber-100 text-amber-700 border border-amber-200"><Coffee size={12}/> PREPARING</span>;
-      case 'READY': return <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-bold bg-emerald-100 text-emerald-700 border border-emerald-200"><CheckCircle2 size={12}/> READY</span>;
-      case 'PAID': return <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-bold bg-[#A56A2B]/10 text-[#A56A2B] border border-[#A56A2B]/20"><CheckCircle2 size={12}/> PAID</span>;
-      case 'CANCELLED': return <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-bold bg-red-100 text-red-700 border border-red-200"><XCircle size={12}/> CANCELLED</span>;
-      default: return <span className="inline-flex px-3 py-1 rounded-lg text-xs font-bold bg-gray-100 text-gray-600 border border-gray-200">{status}</span>;
+      case 'DRAFT': return <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-3xl text-xs font-bold bg-gray-100 text-gray-600 border border-gray-200"><Clock size={12}/> DRAFT</span>;
+      case 'CONFIRMED': return <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-3xl text-xs font-bold bg-blue-100 text-blue-700 border border-blue-200"><CheckCircle2 size={12}/> CONFIRMED</span>;
+      case 'PREPARING': return <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-3xl text-xs font-bold bg-amber-100 text-amber-700 border border-amber-200"><Coffee size={12}/> PREPARING</span>;
+      case 'READY': return <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-3xl text-xs font-bold bg-emerald-100 text-emerald-700 border border-emerald-200"><CheckCircle2 size={12}/> READY</span>;
+      case 'PAID': return <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-3xl text-xs font-bold bg-[#A56A2B]/10 text-[#A56A2B] border border-[#A56A2B]/20"><CheckCircle2 size={12}/> PAID</span>;
+      case 'CANCELLED': return <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-3xl text-xs font-bold bg-red-100 text-red-700 border border-red-200"><XCircle size={12}/> CANCELLED</span>;
+      default: return <span className="inline-flex px-3 py-1 rounded-3xl text-xs font-bold bg-gray-100 text-gray-600 border border-gray-200">{status}</span>;
     }
   };
 
@@ -45,7 +45,7 @@ export default function OrdersPage() {
         <div className="p-8 pb-6 flex-shrink-0 relative z-10">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
             <div className="flex items-center gap-4">
-              <div className="bg-gradient-to-br from-[#A56A2B] to-[#8B5A2B] p-3 rounded-2xl shadow-lg shadow-[#A56A2B]/30 text-white">
+              <div className="bg-gradient-to-br from-[#A56A2B] to-[#8B5A2B] p-3 rounded-2xl shadow-sm-lg shadow-sm-[#A56A2B]/30 text-white">
                 <ClipboardList size={32} />
               </div>
               <div>
@@ -73,7 +73,7 @@ export default function OrdersPage() {
         </div>
 
         <div className="flex-1 px-8 pb-8 overflow-hidden relative z-10">
-          <div className="bg-white/80 backdrop-blur-xl rounded-[2.5rem] shadow-2xl shadow-black/5 border border-white h-full flex flex-col overflow-hidden">
+          <div className="bg-white/80 backdrop-blur-xl rounded-[2.5rem] shadow-sm-2xl shadow-sm-black/5 border border-white h-full flex flex-col overflow-hidden">
             <div className="overflow-x-auto flex-1 p-0">
               <table className="w-full text-left border-collapse">
                 <thead className="bg-[#F8F4EA]/50 sticky top-0 backdrop-blur-md z-10">
@@ -87,7 +87,7 @@ export default function OrdersPage() {
                   {filteredOrders.map(order => (
                     <tr key={order.id} className="hover:bg-[#F8F4EA]/40 transition-colors group cursor-pointer">
                       <td className="px-8 py-5">
-                        <span className="font-black text-[#2C1810] bg-gray-50 px-3 py-1.5 rounded-lg border border-gray-100">{order.orderRef}</span>
+                        <span className="font-black text-[#2C1810] bg-gray-50 px-3 py-1.5 rounded-3xl border border-gray-100">{order.orderRef}</span>
                       </td>
                       <td className="px-8 py-5">
                         <span className="font-bold text-[#6B5B4F]">{order.table?.name || 'Takeaway'}</span>

@@ -44,7 +44,7 @@ export default function KitchenPage() {
       <div className="flex-1 p-8 overflow-auto">
         <div className="flex justify-between items-center mb-8">
           <div className="flex items-center gap-4">
-            <div className="bg-[#A56A2B] p-3 rounded-2xl shadow-lg shadow-[#A56A2B]/30 text-white">
+            <div className="bg-[#A56A2B] p-3 rounded-2xl shadow-sm-lg shadow-sm-[#A56A2B]/30 text-white">
               <ChefHat size={32} />
             </div>
             <div>
@@ -71,7 +71,7 @@ export default function KitchenPage() {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {orders.map(order => (
-              <div key={order.id} className={`relative flex flex-col bg-white rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow border-t-8 ${order.priority === 'urgent' ? 'border-t-red-500' : order.status === 'new' ? 'border-t-amber-500' : 'border-t-blue-500'}`}>
+              <div key={order.id} className={`relative flex flex-col bg-white rounded-3xl overflow-hidden shadow-sm-xl hover:shadow-sm-2xl transition-shadow-sm border-t-8 ${order.priority === 'urgent' ? 'border-t-red-500' : order.status === 'new' ? 'border-t-amber-500' : 'border-t-blue-500'}`}>
                 {order.priority === 'urgent' && (
                   <div className="absolute top-4 right-4 animate-bounce">
                     <AlertTriangle className="text-red-500" size={24} />
@@ -94,7 +94,7 @@ export default function KitchenPage() {
                     {order.items.map(item => (
                       <div key={item.id} className="flex justify-between items-center p-3 rounded-xl bg-[#F8F4EA]/50 border border-[#E7DDCF] hover:bg-[#F8F4EA] transition-colors">
                         <div className="flex items-center gap-3">
-                          <span className="bg-[#A56A2B] text-white font-black px-2.5 py-1 rounded-lg text-sm">{item.qty}x</span>
+                          <span className="bg-[#A56A2B] text-white font-black px-2.5 py-1 rounded-3xl text-sm">{item.qty}x</span>
                           <span className="font-bold text-[#2C1810] text-lg">{item.productName}</span>
                         </div>
                         {item.status === 'ready' && <CheckCircle className="text-emerald-500" size={20} />}
@@ -105,17 +105,17 @@ export default function KitchenPage() {
 
                 <div className="p-4 bg-gray-50 border-t border-gray-100 mt-auto">
                   {order.status === 'new' && (
-                    <button onClick={() => updateStatus(order.id, 'preparing')} className="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white font-bold text-lg rounded-xl py-3.5 shadow-lg shadow-blue-500/30 hover:scale-[1.02] active:scale-95 transition-all">
+                    <button onClick={() => updateStatus(order.id, 'preparing')} className="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white font-bold text-lg rounded-xl py-3.5 shadow-sm-lg shadow-sm-blue-500/30 hover:scale-[1.02] active:scale-95 transition-all">
                       Start Preparing
                     </button>
                   )}
                   {order.status === 'preparing' && (
-                    <button onClick={() => updateStatus(order.id, 'ready')} className="w-full bg-gradient-to-r from-emerald-500 to-emerald-600 text-white font-bold text-lg rounded-xl py-3.5 shadow-lg shadow-emerald-500/30 hover:scale-[1.02] active:scale-95 transition-all">
+                    <button onClick={() => updateStatus(order.id, 'ready')} className="w-full bg-gradient-to-r from-emerald-500 to-emerald-600 text-white font-bold text-lg rounded-xl py-3.5 shadow-sm-lg shadow-sm-emerald-500/30 hover:scale-[1.02] active:scale-95 transition-all">
                       Mark as Ready
                     </button>
                   )}
                   {order.status === 'ready' && (
-                    <button onClick={() => updateStatus(order.id, 'served')} className="w-full bg-gradient-to-r from-[#A56A2B] to-[#8B5A2B] text-white font-bold text-lg rounded-xl py-3.5 shadow-lg shadow-[#A56A2B]/30 hover:scale-[1.02] active:scale-95 transition-all">
+                    <button onClick={() => updateStatus(order.id, 'served')} className="w-full bg-gradient-to-r from-[#A56A2B] to-[#8B5A2B] text-white font-bold text-lg rounded-xl py-3.5 shadow-sm-lg shadow-sm-[#A56A2B]/30 hover:scale-[1.02] active:scale-95 transition-all">
                       Order Served
                     </button>
                   )}
@@ -125,7 +125,7 @@ export default function KitchenPage() {
             
             {orders.length === 0 && !loading && (
               <div className="col-span-full flex flex-col items-center justify-center py-20 text-[#6B5B4F]">
-                <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center shadow-lg mb-6 text-gray-300">
+                <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center shadow-sm-lg mb-6 text-gray-300">
                   <ChefHat size={48} />
                 </div>
                 <h3 className="text-2xl font-bold text-[#2C1810] mb-2">No active orders</h3>

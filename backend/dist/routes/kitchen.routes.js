@@ -38,7 +38,7 @@ const auth_middleware_1 = require("../middleware/auth.middleware");
 const kitchenController = __importStar(require("../controllers/kitchen.controller"));
 const router = (0, express_1.Router)();
 router.use(auth_middleware_1.authenticate);
-router.use((0, auth_middleware_1.authorize)('ADMIN', 'KITCHEN'));
+router.use((0, auth_middleware_1.authorize)('ADMIN', 'KITCHEN_STAFF'));
 router.get('/orders', kitchenController.getOrders);
 router.put('/orders/:id/status', kitchenController.updateStatus);
 router.put('/items/:itemId/status', kitchenController.updateItemStatus);

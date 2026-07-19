@@ -212,6 +212,13 @@ async function main() {
   });
 
   // 11. Orders (50) & Kitchen Tickets (20) & Payments
+  // Clean up existing order data for idempotent re-runs
+  await prisma.kitchenItem.deleteMany();
+  await prisma.kitchenOrder.deleteMany();
+  await prisma.payment.deleteMany();
+  await prisma.orderLine.deleteMany();
+  await prisma.order.deleteMany();
+
   const cashierEmp = await prisma.employee.findUnique({ where: { employeeCode: 'EMP-POS' } });
   
   if (cashierEmp) {
@@ -293,5 +300,13 @@ async function main() {
 }
 
 main()
-  .catch((e) => { console.error(e); process.exit(1); })
-  .finally(async () => { await prisma.$disconnect(); });
+  .then(async () => {
+    await prisma.$disconnect();
+  })
+  .catch(async (e) => {
+    // eslint-disable-next-line no-console
+    console.error(e);
+    await prisma.$disconnect();
+    // eslint-disable-next-line no-process-exit
+    process.exit(1);
+  });
